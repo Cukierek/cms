@@ -17,6 +17,15 @@ public class Cinema {
     private String name;
     private String city;
 
+    public Cinema() {
+    }
+
+    public Cinema(Long id, String name, String city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
+
     public Long getId() {
         return id;
     }

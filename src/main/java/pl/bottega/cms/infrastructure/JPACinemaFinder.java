@@ -12,7 +12,6 @@ import java.util.List;
 @Component
 public class JPACinemaFinder implements CinemaFinder {
 
-    @Autowired
     private EntityManager entityManager;
 
     public JPACinemaFinder(EntityManager entityManager) {
