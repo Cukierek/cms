@@ -18,7 +18,8 @@ public class AcceptanceTest {
     @After
     public void cleanUp() {
         tt.execute((c) -> {
-            em.createNativeQuery("DELETE FROM cinemas").executeUpdate();
+            em.createNativeQuery("TRUNCATE TABLE cinemas").executeUpdate();
+            em.createNativeQuery("TRUNCATE TABLE movies").executeUpdate();
             return null;
         });
     }
