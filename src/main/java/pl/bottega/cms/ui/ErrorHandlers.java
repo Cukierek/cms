@@ -15,7 +15,6 @@ public class ErrorHandlers {
 			reason = "Entity with given id does not exist")
 	@ExceptionHandler(NoSuchEntityException.class)
 	public void handleEntityNotFound() {
-
 	}
 
 	@ExceptionHandler(CommandInvalidException.class)

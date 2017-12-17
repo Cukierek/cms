@@ -13,11 +13,13 @@ public class Cinema {
     private Long id;
 
     private String name;
-
     private String city;
 
-    public Cinema(CreateCinemaCommand createCinemaCommand) {
-        this.name = createCinemaCommand.getName();
-        this.city = createCinemaCommand.getCity();
+    public Cinema() {
+    }
+
+    public Cinema(CreateCinemaCommand cmd) {
+        this.name = cmd.getName();
+        this.city = cmd.getCity();
     }
 }

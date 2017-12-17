@@ -25,7 +25,7 @@ public class CinemaController {
     }
 
     @GetMapping("/cinemas")
-    public List<CinemaDto> getAllCinemas(@PathVariable String city) {
+    public List<CinemaDto> getAllCinemas() {
         return cinemaFinder.getAll();
     }
 
