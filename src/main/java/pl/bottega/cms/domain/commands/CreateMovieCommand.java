@@ -3,6 +3,7 @@ package pl.bottega.cms.domain.commands;
 
 import java.util.Set;
 
+
 public class CreateMovieCommand implements Command {
 
     private String title;
@@ -10,7 +11,7 @@ public class CreateMovieCommand implements Command {
     private Set<String> actors;
     private Set<String> genres;
     private Integer minAge;
-    private Integer lenght;
+    private Integer length;
 
 
 
@@ -54,12 +55,12 @@ public class CreateMovieCommand implements Command {
         this.minAge = minAge;
     }
 
-    public Integer getLenght() {
-        return lenght;
+    public Integer getLength() {
+        return length;
     }
 
-    public void setLenght(Integer lenght) {
-        this.lenght = lenght;
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
     public void validate(ValidationErrors errors) {
@@ -68,7 +69,7 @@ public class CreateMovieCommand implements Command {
         validatePresence(errors, "actors", actors);
         validatePresence(errors, "genres", genres);
         validatePresence(errors, "minAge", minAge);
-        validatePresence(errors, "lenght", lenght);
+        validatePresence(errors, "length", length);
     }
 
 

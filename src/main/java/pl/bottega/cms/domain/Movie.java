@@ -9,6 +9,7 @@ import java.util.Set;
 public class Movie {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private String title;
@@ -23,7 +24,7 @@ public class Movie {
 
     private Integer minAge;
 
-    private Integer lenght;
+    private Integer length;
 
 
     public Movie() {
@@ -33,7 +34,7 @@ public class Movie {
         this.actors = cmd.getActors();
         this.description = cmd.getDescription();
         this.genres = cmd.getGenres();
-        this.lenght = cmd.getLenght();
+        this.length = cmd.getLength();
         this.minAge = cmd.getMinAge();
         this.title = cmd.getTitle();
     }
@@ -63,7 +64,7 @@ public class Movie {
         return minAge;
     }
 
-    public Integer getLenght() {
-        return lenght;
+    public Integer getLength() {
+        return length;
     }
 }
