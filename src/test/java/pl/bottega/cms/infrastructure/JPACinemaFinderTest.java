@@ -10,6 +10,7 @@ import pl.bottega.cms.acceptance.AcceptanceTest;
 import pl.bottega.cms.api.CinemaDto;
 import pl.bottega.cms.api.CinemaFinder;
 import pl.bottega.cms.domain.Cinema;
+import pl.bottega.cms.domain.commands.CreateCinemaCommand;
 
 import javax.persistence.EntityManager;
 
@@ -30,11 +31,12 @@ public class JPACinemaFinderTest extends AcceptanceTest {
     @Autowired
     private CinemaFinder cinemaFinder;
 
+
     private void createCinemas() {
         tt.execute(c -> {
-            entityManager.persist(new Cinema(1L, "Felicity", "Lublin"));
-            entityManager.persist(new Cinema(2L,"Plaza", "Lublin"));
-            entityManager.persist(new Cinema(3L, "Złote tarasy", "Warszawa"));
+            entityManager.persist(new Cinema(new CreateCinemaCommand("Felicty", "Lublin")));
+            entityManager.persist(new Cinema(new CreateCinemaCommand("Plaza", "Lublin")));
+            entityManager.persist(new Cinema(new CreateCinemaCommand("Złote tarasy", "Warszawa")));
             return null;
         });
     }
