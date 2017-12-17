@@ -1,8 +1,22 @@
 package pl.bottega.cms.infrastructure;
 
+import org.springframework.stereotype.Component;
 import pl.bottega.cms.domain.Cinema;
+import pl.bottega.cms.domain.CinemaRepository;
 
-public class JPACinemaRepository {
-    void save(Cinema cinema){}
+import javax.persistence.EntityManager;
 
+@Component
+public class JPACinemaRepository implements CinemaRepository {
+
+    private EntityManager entityManager;
+
+    public JPACinemaRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    @Override
+    public void save(Cinema cinema) {
+        entityManager.persist(cinema);
+    }
 }

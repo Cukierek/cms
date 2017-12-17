@@ -1,10 +1,9 @@
 package pl.bottega.cms.ui;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.bottega.cms.api.CinemaDto;
 import pl.bottega.cms.api.CinemaFinder;
+import pl.bottega.cms.api.CommandGateway;
 import pl.bottega.cms.domain.commands.CreateCinemaCommand;
 
 import java.util.List;
@@ -13,10 +12,19 @@ import java.util.List;
 public class CinemaController {
 
     private CinemaFinder cinemaFinder;
+    private CommandGateway gateway;
 
-    void create(CreateCinemaCommand cmd){}
+    public CinemaController(CinemaFinder cinemaFinder, CommandGateway gateway) {
+        this.cinemaFinder = cinemaFinder;
+        this.gateway = gateway;
+    }
 
-    @GetMapping("/cinemas/")
+    @PutMapping("/cinemas")
+    public void create(@RequestBody CreateCinemaCommand cmd){
+        gateway.execute(cmd);
+    }
+
+    @GetMapping("/cinemas")
     public List<CinemaDto> getAllCinemas(@PathVariable String city) {
         return cinemaFinder.getAll();
     }
