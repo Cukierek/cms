@@ -1,4 +1,4 @@
-package domain.commands;
+package pl.bottega.cms.domain.commands;
 
 import java.util.HashMap;
 import java.util.Map;

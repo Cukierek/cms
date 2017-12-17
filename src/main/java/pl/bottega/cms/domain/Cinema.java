@@ -1,4 +1,4 @@
-package domain;
+package pl.bottega.cms.domain;
 
 public class Cinema {
 

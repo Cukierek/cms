@@ -1,4 +1,4 @@
-package api;
+package pl.bottega.cms.api;
 
 public class CinemaDto {
 

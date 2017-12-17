@@ -1,4 +1,4 @@
-package domain.commands;
+package pl.bottega.cms.domain.commands;
 
 public class CommandInvalidException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package infrastructure;
+package pl.bottega.cms.infrastructure;
 
-import domain.Cinema;
+import pl.bottega.cms.domain.Cinema;
 
 import java.util.List;
 

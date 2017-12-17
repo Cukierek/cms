@@ -1,4 +1,4 @@
-package domain;
+package pl.bottega.cms.domain;
 
 import java.util.List;
 
