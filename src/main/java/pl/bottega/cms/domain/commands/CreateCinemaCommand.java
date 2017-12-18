@@ -5,12 +5,17 @@ public class CreateCinemaCommand implements Command {
     private String name;
     private String city;
 
+    public CreateCinemaCommand() {
+    }
+
     public CreateCinemaCommand(String name, String city) {
         this.name = name;
         this.city = city;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -23,4 +28,10 @@ public class CreateCinemaCommand implements Command {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void validate(ValidationErrors errors) {
+        validatePresence(errors, "name", name);
+        validatePresence(errors, "city", city);
+    }
+
 }
