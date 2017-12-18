@@ -1,8 +1,6 @@
 package pl.bottega.cms.domain.commands;
 
-
 import java.util.Set;
-
 
 public class CreateMovieCommand implements Command {
 

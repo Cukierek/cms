@@ -22,6 +22,9 @@ public class JPACinemaFinder implements CinemaFinder {
     public List<CinemaDto> getAll() {
         String jpql = "SELECT NEW pl.bottega.cms.api.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
         Query query = entityManager.createQuery(jpql);
-        return query.getResultList();
+        List<CinemaDto> result = query.getResultList();
+        if (result.size() == 0)
+            throw new NoSuchEntityException();
+        return result;
     }
 }
