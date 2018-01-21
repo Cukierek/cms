@@ -1,4 +1,4 @@
-package pl.bottega.cms.domain;
+package pl.bottega.cms.model;
 
 
 public interface MovieRepository {

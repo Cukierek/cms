@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.bottega.cms.domain.commands.CommandInvalidException;
+import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.infrastructure.NoSuchEntityException;
 
 @ControllerAdvice

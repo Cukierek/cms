@@ -2,17 +2,26 @@ package pl.bottega.cms.model;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.CreateShowsCommand;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MovieTest {
+public class ShowTest {
 	@Test
-	public void shouldCreateMovieFromCommand() {
+	public void shouldCreateShow() {
 		// GIVEN
+		CreateCinemaCommand ccc = new CreateCinemaCommand();
+
+		ccc.setName("Felicity");
+		ccc.setCity("Lublin");
+
 		CreateMovieCommand cmc = new CreateMovieCommand();
+
 		Set<String> actors = new HashSet<String>(Arrays.asList("John Travolta", "Samuel L. Jackson"));
 		Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
 		String description = "Fajny film";
@@ -25,14 +34,16 @@ public class MovieTest {
 		cmc.setMinAge(minAge);
 		cmc.setTitle(title);
 
-		// WHEN
+		Cinema cinema = new Cinema(ccc);
 		Movie movie = new Movie(cmc);
+		LocalDateTime date = LocalDateTime.parse("2017-01-01T20:30:00");
+
+		// WHEN
+		Show show = new Show(cinema, movie, date);
 
 		// THEN
-		Assert.assertEquals(cmc.getTitle(), movie.getTitle());
-		Assert.assertEquals(cmc.getMinAge(), movie.getMinAge());
-		Assert.assertEquals(cmc.getActors(), movie.getActors());
-		Assert.assertEquals(cmc.getGenres(), movie.getGenres());
-		Assert.assertEquals(cmc.getDescription(), movie.getDescription());
+		Assert.assertEquals(cinema, show.getCinema());
+		Assert.assertEquals(movie, show.getMovie());
+		Assert.assertEquals(date, show.getDate());
 	}
 }

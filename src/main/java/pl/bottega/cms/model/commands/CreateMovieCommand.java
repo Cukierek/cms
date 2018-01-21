@@ -1,4 +1,4 @@
-package pl.bottega.cms.domain.commands;
+package pl.bottega.cms.model.commands;
 
 import java.util.Set;
 

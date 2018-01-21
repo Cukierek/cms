@@ -1,12 +1,12 @@
-package pl.bottega.cms.api;
+package pl.bottega.cms.application;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.bottega.cms.domain.Show;
-import pl.bottega.cms.domain.ShowFactory;
-import pl.bottega.cms.domain.ShowRepository;
-import pl.bottega.cms.domain.commands.Command;
-import pl.bottega.cms.domain.commands.CreateShowsCommand;
+import pl.bottega.cms.model.Show;
+import pl.bottega.cms.model.ShowFactory;
+import pl.bottega.cms.model.ShowRepository;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CreateShowsCommand;
 
 import java.util.Collection;
 

@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.bottega.cms.api.CommandGateway;
-import pl.bottega.cms.domain.commands.CreateMovieCommand;
+import pl.bottega.cms.application.CommandGateway;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 
 @RestController

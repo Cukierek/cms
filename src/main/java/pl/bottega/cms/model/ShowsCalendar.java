@@ -1,4 +1,4 @@
-package pl.bottega.cms.domain;
+package pl.bottega.cms.model;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,5 +24,21 @@ public class ShowsCalendar {
 
 	public Set<LocalTime> getHours() {
 		return hours;
+	}
+
+	public void setFromDate(LocalDateTime fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public void setUntilDate(LocalDateTime untilDate) {
+		this.untilDate = untilDate;
+	}
+
+	public void setWeekDays(Set<String> weekDays) {
+		this.weekDays = weekDays;
+	}
+
+	public void setHours(Set<LocalTime> hours) {
+		this.hours = hours;
 	}
 }

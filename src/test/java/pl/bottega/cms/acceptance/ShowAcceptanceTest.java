@@ -1,6 +1,5 @@
-package pl.bottega.cms.infrastructure;
+package pl.bottega.cms.acceptance;
 
-import org.apache.tomcat.jni.Local;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +7,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
 import pl.bottega.cms.acceptance.AcceptanceTest;
-import pl.bottega.cms.domain.*;
-import pl.bottega.cms.domain.commands.CreateCinemaCommand;
-import pl.bottega.cms.domain.commands.CreateMovieCommand;
-import pl.bottega.cms.domain.commands.CreateShowsCommand;
+import pl.bottega.cms.model.*;
+import pl.bottega.cms.model.commands.CreateCinemaCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.CreateShowsCommand;
 
 import javax.persistence.EntityManager;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ShowFactoryTest extends AcceptanceTest {
+public class ShowAcceptanceTest extends AcceptanceTest {
 
 	@Autowired
 	private TransactionTemplate tt;
@@ -81,18 +82,27 @@ public class ShowFactoryTest extends AcceptanceTest {
 		});
 	}
 
-	private CreateShowsCommand createShows(String requestType) {
-		switch (requestType) {
+	private CreateShowsCommand createShows(String parameterSet) {
+		CreateShowsCommand csc = new CreateShowsCommand();
+		switch (parameterSet) {
 			case "dates" : {
-				CreateShowsCommand csc = new CreateShowsCommand();
 				csc.setCinemaId(1L);
 				csc.setMovieId(1L);
-				csc.setDates(new HashSet<LocalDateTime>(Arrays.asList(LocalDateTime.parse("2017,1,1, 10, 30)"),
-						LocalDateTime.parse("2017/01/01 14:00"), LocalDateTime.parse("2017/01/01 18:30"),
-						LocalDateTime.parse("2017/01/01 20:30"), LocalDateTime.parse("2017/01/01 22:15"))));
+				csc.setDates(new HashSet<>(Arrays.asList(LocalDateTime.parse("2017-01-01T10:30:00"),
+						LocalDateTime.parse("2017-01-01T14:00:00"), LocalDateTime.parse("2017-01-01T18:30:00"),
+						LocalDateTime.parse("2017-01-01T20:30:00"), LocalDateTime.parse("2017-01-01T22:15:00"))));
+				return csc;
 			}
 			case "calendar" : {
-
+				csc.setCinemaId(1L);
+				csc.setMovieId(1L);
+				ShowsCalendar showsCalendar = new ShowsCalendar();
+				showsCalendar.setFromDate(LocalDateTime.parse("2018-01-01T10:30:00"));
+				showsCalendar.setUntilDate(LocalDateTime.parse("2018-01-15T22:30:00"));
+				showsCalendar.setHours(new HashSet<>(Arrays.asList(LocalTime.parse("12:30:00"))));
+				showsCalendar.setWeekDays(new HashSet<>(Arrays.asList("Wednesday", "Thursday")));
+				csc.setShowsCalendar(showsCalendar);
+				return csc;
 			}
 			default: return null;
 		}
@@ -100,18 +110,30 @@ public class ShowFactoryTest extends AcceptanceTest {
 
 	@Test
 	public void shouldCreateShowsFromDatesRequest() {
-		// given
+		// GIVEN
 		createCinemas();
 		createMovies();
 		CreateShowsCommand csc = createShows("dates");
 
-		// when
+		// WHEN
 		Collection<Show> shows = showFactory.createShows(csc);
 
-		// then
-		assertEquals(3, shows.size());
+		// THEN
+		assertEquals(5, shows.size());
 	}
 
+	@Test
+	public void shouldCreateShowsFromCalendarRequest() {
+		// GIVEN
+		createCinemas();
+		createMovies();
+		CreateShowsCommand csc = createShows("calendar");
 
+		// WHEN
+		Collection<Show> shows = showFactory.createShows(csc);
+
+		// THEN
+		assertEquals(4, shows.size());
+	}
 
 }

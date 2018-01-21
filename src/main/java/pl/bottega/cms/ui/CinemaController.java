@@ -1,11 +1,11 @@
 package pl.bottega.cms.ui;
 
 import org.springframework.web.bind.annotation.*;
-import pl.bottega.cms.api.CinemaDto;
-import pl.bottega.cms.api.CinemaFinder;
-import pl.bottega.cms.api.CommandGateway;
-import pl.bottega.cms.domain.commands.CreateCinemaCommand;
-import pl.bottega.cms.domain.commands.CreateShowsCommand;
+import pl.bottega.cms.application.CinemaDto;
+import pl.bottega.cms.application.CinemaFinder;
+import pl.bottega.cms.application.CommandGateway;
+import pl.bottega.cms.model.commands.CreateCinemaCommand;
+import pl.bottega.cms.model.commands.CreateShowsCommand;
 
 import java.util.List;
 

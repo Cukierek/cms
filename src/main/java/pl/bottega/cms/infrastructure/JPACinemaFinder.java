@@ -1,16 +1,11 @@
 package pl.bottega.cms.infrastructure;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.bottega.cms.api.CinemaDto;
-import pl.bottega.cms.api.CinemaFinder;
-import pl.bottega.cms.domain.Cinema;
+import pl.bottega.cms.application.CinemaDto;
+import pl.bottega.cms.application.CinemaFinder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Component
@@ -24,7 +19,7 @@ public class JPACinemaFinder implements CinemaFinder {
 
     @Override
     public List<CinemaDto> getAll() {
-        String jpql = "SELECT NEW pl.bottega.cms.api.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
+        String jpql = "SELECT NEW pl.bottega.cms.application.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
         Query query = entityManager.createQuery(jpql);
         List<CinemaDto> result = query.getResultList();
         if (result.size() == 0)

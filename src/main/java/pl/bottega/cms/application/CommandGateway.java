@@ -1,8 +1,8 @@
-package pl.bottega.cms.api;
+package pl.bottega.cms.application;
 
-import pl.bottega.cms.domain.commands.Command;
-import pl.bottega.cms.domain.commands.CommandInvalidException;
-import pl.bottega.cms.domain.commands.ValidationErrors;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CommandInvalidException;
+import pl.bottega.cms.model.commands.ValidationErrors;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 

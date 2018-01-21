@@ -1,6 +1,6 @@
-package pl.bottega.cms.domain.commands;
+package pl.bottega.cms.model.commands;
 
-import pl.bottega.cms.domain.ShowsCalendar;
+import pl.bottega.cms.model.ShowsCalendar;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -11,6 +11,9 @@ public class CreateShowsCommand implements Command {
 	private Long cinemaId;
 	private Set<LocalDateTime> dates;
 	private ShowsCalendar showsCalendar;
+
+	private boolean hasDates = false;
+	private boolean hasShowsCalendar = false;
 
 	public Long getMovieId() {
 		return movieId;
@@ -44,24 +47,36 @@ public class CreateShowsCommand implements Command {
 		this.showsCalendar = showsCalendar;
 	}
 
-	public boolean isShowsCalendarPresent() {
-		return showsCalendar != null;
+	public boolean hasBothParameterSets() {
+		return hasShowsCalendar && hasDates;
 	}
 
 	public boolean isHasDates() {
-		return !dates.isEmpty() && dates != null;
+		if (dates != null){
+			if (!dates.isEmpty()) hasDates = true;
+		}
+		return hasDates;
 	}
 
-	public boolean isHasBoth() {
-		return isShowsCalendarPresent() && isHasDates();
+	public boolean isHasShowsCalendar() {
+		if (showsCalendar != null) {
+			hasShowsCalendar = true;
+		}
+		return hasShowsCalendar;
 	}
 
 	public void validate(ValidationErrors errors) {
 		validatePresence(errors, "movieId", movieId);
 		validatePresence(errors, "cinemaId", cinemaId);
-		if(isShowsCalendarPresent()) validatePresence(errors, "showsCalendar", showsCalendar);
-		if(isHasDates()) validatePresence(errors, "dates", dates);
-		boolean requestHasTooManyParameters = isHasBoth();
+		if(showsCalendar != null) {
+			hasShowsCalendar = true;
+			validatePresence(errors, "showsCalendar", showsCalendar);
+		}
+		if(dates != null) {
+			hasDates = true;
+			validatePresence(errors, "dates", dates);
+		}
+		boolean requestHasTooManyParameters = hasBothParameterSets();
 		validateRequestFormat(errors, requestHasTooManyParameters, "dates or calendar");
 	}
 }

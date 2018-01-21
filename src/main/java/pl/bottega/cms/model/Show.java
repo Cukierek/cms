@@ -1,6 +1,4 @@
-package pl.bottega.cms.domain;
-
-import pl.bottega.cms.domain.commands.CreateShowsCommand;
+package pl.bottega.cms.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -30,5 +28,17 @@ public class Show {
 		this.cinema = cinema;
 		this.movie = movie;
 		this.date = date;
+	}
+
+	public Cinema getCinema() {
+		return cinema;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
 	}
 }

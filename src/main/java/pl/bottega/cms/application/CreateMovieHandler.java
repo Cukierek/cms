@@ -1,10 +1,10 @@
-package pl.bottega.cms.api;
+package pl.bottega.cms.application;
 
 import org.springframework.stereotype.Component;
-import pl.bottega.cms.domain.Movie;
-import pl.bottega.cms.domain.MovieRepository;
-import pl.bottega.cms.domain.commands.Command;
-import pl.bottega.cms.domain.commands.CreateMovieCommand;
+import pl.bottega.cms.model.Movie;
+import pl.bottega.cms.model.MovieRepository;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 import javax.transaction.Transactional;
 

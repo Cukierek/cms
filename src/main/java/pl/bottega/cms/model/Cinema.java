@@ -1,6 +1,6 @@
-package pl.bottega.cms.domain;
+package pl.bottega.cms.model;
 
-import pl.bottega.cms.domain.commands.CreateCinemaCommand;
+import pl.bottega.cms.model.commands.CreateCinemaCommand;
 
 import javax.persistence.*;
 
@@ -25,5 +25,14 @@ public class Cinema {
 
 	public Long getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "Cinema{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", city='" + city + '\'' +
+				'}';
 	}
 }

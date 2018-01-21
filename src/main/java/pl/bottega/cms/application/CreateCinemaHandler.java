@@ -1,12 +1,12 @@
-package pl.bottega.cms.api;
+package pl.bottega.cms.application;
 
 import org.springframework.stereotype.Component;
-import pl.bottega.cms.domain.Cinema;
-import pl.bottega.cms.domain.CinemaRepository;
-import pl.bottega.cms.domain.commands.Command;
-import pl.bottega.cms.domain.commands.CommandInvalidException;
-import pl.bottega.cms.domain.commands.CreateCinemaCommand;
-import pl.bottega.cms.domain.commands.ValidationErrors;
+import pl.bottega.cms.model.Cinema;
+import pl.bottega.cms.model.CinemaRepository;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CommandInvalidException;
+import pl.bottega.cms.model.commands.CreateCinemaCommand;
+import pl.bottega.cms.model.commands.ValidationErrors;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -24,25 +24,39 @@ public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
 
     @Transactional
     public void handle(CreateCinemaCommand cmd) {
-        Cinema cinema = new Cinema(cmd);
-        validateCinemaPresence(cmd);
+	    validateCinemaPresence(cmd);
+	    validateCinemaParameters(cmd);
+	    Cinema cinema = new Cinema(cmd);
         cinemaRepository.save(cinema);
     }
 
-    @Override
+	@Override
     public Class<? extends Command> getSupportedCommandClass() {
         return CreateCinemaCommand.class;
     }
 
     public void validateCinemaPresence(CreateCinemaCommand cmd) {
         Optional<Cinema> cinema = cinemaRepository.findByNameAndCity(cmd.getName(), cmd.getCity());
-        if (isCinemaExists(cinema)) {
+        if (isPresentInRepository(cinema)) {
             validationErrors.add("cinema", "Cinema with the given name and city has already been created");
             throw new CommandInvalidException(validationErrors);
         }
     }
 
-    private boolean isCinemaExists(Optional<Cinema> cinema) {
+    public void validateCinemaParameters(CreateCinemaCommand cmd) {
+    	boolean commandInvalid = false;
+	    if (cmd.getName().isEmpty()) {
+	    	validationErrors.add("Name","Can't be empty");
+	    	commandInvalid = true;
+	    }
+	    if (cmd.getCity().isEmpty()) {
+	    	validationErrors.add("City","Can't be empty");
+	    	commandInvalid = true;
+	    }
+	    if (commandInvalid) throw new CommandInvalidException(validationErrors);
+    }
+
+    private boolean isPresentInRepository(Optional<Cinema> cinema) {
         return cinema.isPresent();
     }
 }

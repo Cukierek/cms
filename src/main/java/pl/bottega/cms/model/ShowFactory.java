@@ -1,9 +1,12 @@
-package pl.bottega.cms.domain;
+package pl.bottega.cms.model;
 
 import org.springframework.stereotype.Component;
-import pl.bottega.cms.domain.commands.CreateShowsCommand;
+import pl.bottega.cms.model.commands.CreateShowsCommand;
 
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -21,22 +24,22 @@ public class ShowFactory {
 	}
 
 	public Collection<Show> createShows(CreateShowsCommand cmd) {
-		if(cmd.isHasBoth()) throw new IllegalArgumentException("You should either use calendar or dates, not both.");
+		if (cmd.hasBothParameterSets())
+			throw new IllegalArgumentException("You should either use calendar or dates, not both.");
 		Collection<Show> shows = new LinkedList<>();
-		if(cmd.isHasDates()) {
+		if (cmd.isHasDates()) {
 
-			// Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
+			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());
 
 			cmd.getDates().stream().forEach(date -> {
-				// Show show = new Show(cinema, movie, date);
-				// shows.add(show);
+				Show show = new Show(cinema, movie, date);
+				shows.add(show);
 			});
 
-		} else if (cmd.isShowsCalendarPresent()) {
+		} else if (cmd.isHasShowsCalendar()) {
 
-			Cinema cinema = new Cinema();
-			//Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
+			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());
 
 			ShowsCalendar showsCalendar = cmd.getShowsCalendar();
@@ -48,8 +51,8 @@ public class ShowFactory {
 					.mapToObj(i -> fromDate.plusDays(i))
 					.forEach(day -> {
 						for (String weekDay : showsCalendar.getWeekDays()) {
-							if(day.getDayOfWeek() == DayOfWeek.valueOf(weekDay.toUpperCase())){
-								for(LocalTime time : showsCalendar.getHours()){
+							if (day.getDayOfWeek() == DayOfWeek.valueOf(weekDay.toUpperCase())) {
+								for (LocalTime time : showsCalendar.getHours()) {
 									LocalDate date = day.toLocalDate();
 									LocalDateTime showTime = LocalDateTime.of(date, time);
 									Show show = new Show(cinema, movie, showTime);

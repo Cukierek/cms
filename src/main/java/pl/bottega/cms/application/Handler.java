@@ -1,6 +1,6 @@
-package pl.bottega.cms.api;
+package pl.bottega.cms.application;
 
-import pl.bottega.cms.domain.commands.Command;
+import pl.bottega.cms.model.commands.Command;
 
 public interface Handler<C extends Command> {
 

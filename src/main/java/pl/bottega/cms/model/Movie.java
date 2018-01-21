@@ -1,6 +1,6 @@
-package pl.bottega.cms.domain;
+package pl.bottega.cms.model;
 
-import pl.bottega.cms.domain.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 import javax.persistence.*;
 import java.util.Set;
 
