@@ -16,7 +16,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class CreateCinemaTest extends AcceptanceTest{
+public class CreateCinemaTest extends AcceptanceTest {
 
     @Autowired
     private CreateCinemaHandler createCinemaHandler;

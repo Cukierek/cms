@@ -25,17 +25,18 @@ public class ShowFactory {
 		Collection<Show> shows = new LinkedList<>();
 		if(cmd.isHasDates()) {
 
-			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
+			// Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());
 
 			cmd.getDates().stream().forEach(date -> {
-				Show show = new Show(cinema, movie, date);
-				shows.add(show);
+				// Show show = new Show(cinema, movie, date);
+				// shows.add(show);
 			});
 
 		} else if (cmd.isShowsCalendarPresent()) {
 
-			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
+			Cinema cinema = new Cinema();
+			//Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());
 
 			ShowsCalendar showsCalendar = cmd.getShowsCalendar();

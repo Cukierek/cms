@@ -18,10 +18,16 @@ public class AcceptanceTest {
     @After
     public void cleanUp() {
         tt.execute((c) -> {
-            em.createNativeQuery("TRUNCATE TABLE cinemas").executeUpdate();
-            em.createNativeQuery("DELETE FROM movie_genres").executeUpdate();
-            em.createNativeQuery("DELETE FROM movie_actors").executeUpdate();
+            em.createNativeQuery("DELETE FROM cinemas").executeUpdate();
+	        em.createNativeQuery("DELETE FROM movie_actors").executeUpdate();
+	        em.createNativeQuery("DELETE FROM movie_genres").executeUpdate();
             em.createNativeQuery("DELETE FROM movies").executeUpdate();
+            em.createNativeQuery("DELETE FROM shows").executeUpdate();
+            em.createNativeQuery("ALTER TABLE cinemas AUTO_INCREMENT = 1").executeUpdate();
+            em.createNativeQuery("ALTER TABLE movie_actors AUTO_INCREMENT = 1").executeUpdate();
+            em.createNativeQuery("ALTER TABLE movie_genres AUTO_INCREMENT = 1").executeUpdate();
+            em.createNativeQuery("ALTER TABLE movies AUTO_INCREMENT = 1").executeUpdate();
+            em.createNativeQuery("ALTER TABLE shows AUTO_INCREMENT = 1").executeUpdate();
             return null;
         });
     }
