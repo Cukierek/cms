@@ -12,15 +12,15 @@ import pl.bottega.cms.model.commands.CreateMovieCommand;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private CommandGateway commandGateway;
+	private CommandGateway commandGateway;
 
-    public MovieController(CommandGateway commandGateway) {
-        this.commandGateway = commandGateway;
-    }
+	public MovieController(CommandGateway commandGateway) {
+		this.commandGateway = commandGateway;
+	}
 
-    @PutMapping("/create")
-    public void create(@RequestBody CreateMovieCommand cmd) {
-        commandGateway.execute(cmd);
-    }
+	@PutMapping("/create")
+	public void create(@RequestBody CreateMovieCommand cmd) {
+		commandGateway.execute(cmd);
+	}
 
 }

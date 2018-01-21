@@ -11,19 +11,19 @@ import java.util.List;
 @Component
 public class JPACinemaFinder implements CinemaFinder {
 
-    private EntityManager entityManager;
+	private EntityManager entityManager;
 
-    public JPACinemaFinder(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+	public JPACinemaFinder(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
-    @Override
-    public List<CinemaDto> getAll() {
-        String jpql = "SELECT NEW pl.bottega.cms.application.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
-        Query query = entityManager.createQuery(jpql);
-        List<CinemaDto> result = query.getResultList();
-        if (result.size() == 0)
-            throw new NoSuchEntityException();
-        return result;
-    }
+	@Override
+	public List<CinemaDto> getAll() {
+		String jpql = "SELECT NEW pl.bottega.cms.application.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
+		Query query = entityManager.createQuery(jpql);
+		List<CinemaDto> result = query.getResultList();
+		if (result.size() == 0)
+			throw new NoSuchEntityException();
+		return result;
+	}
 }

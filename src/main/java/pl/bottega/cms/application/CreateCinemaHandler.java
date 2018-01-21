@@ -14,49 +14,49 @@ import java.util.Optional;
 @Component
 public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
 
-    private CinemaRepository cinemaRepository;
-    private ValidationErrors validationErrors;
+	private CinemaRepository cinemaRepository;
+	private ValidationErrors validationErrors;
 
-    public CreateCinemaHandler(CinemaRepository cinemaRepository, ValidationErrors validationErrors) {
-        this.cinemaRepository = cinemaRepository;
-        this.validationErrors = validationErrors;
-    }
+	public CreateCinemaHandler(CinemaRepository cinemaRepository, ValidationErrors validationErrors) {
+		this.cinemaRepository = cinemaRepository;
+		this.validationErrors = validationErrors;
+	}
 
-    @Transactional
-    public void handle(CreateCinemaCommand cmd) {
-	    validateCinemaPresence(cmd);
-	    validateCinemaParameters(cmd);
-	    Cinema cinema = new Cinema(cmd);
-        cinemaRepository.save(cinema);
-    }
+	@Transactional
+	public void handle(CreateCinemaCommand cmd) {
+		validateCinemaPresence(cmd);
+		validateCinemaParameters(cmd);
+		Cinema cinema = new Cinema(cmd);
+		cinemaRepository.save(cinema);
+	}
 
 	@Override
-    public Class<? extends Command> getSupportedCommandClass() {
-        return CreateCinemaCommand.class;
-    }
+	public Class<? extends Command> getSupportedCommandClass() {
+		return CreateCinemaCommand.class;
+	}
 
-    public void validateCinemaPresence(CreateCinemaCommand cmd) {
-        Optional<Cinema> cinema = cinemaRepository.findByNameAndCity(cmd.getName(), cmd.getCity());
-        if (isPresentInRepository(cinema)) {
-            validationErrors.add("cinema", "Cinema with the given name and city has already been created");
-            throw new CommandInvalidException(validationErrors);
-        }
-    }
+	public void validateCinemaPresence(CreateCinemaCommand cmd) {
+		Optional<Cinema> cinema = cinemaRepository.findByNameAndCity(cmd.getName(), cmd.getCity());
+		if (isPresentInRepository(cinema)) {
+			validationErrors.add("cinema", "Cinema with the given name and city has already been created");
+			throw new CommandInvalidException(validationErrors);
+		}
+	}
 
-    public void validateCinemaParameters(CreateCinemaCommand cmd) {
-    	boolean commandInvalid = false;
-	    if (cmd.getName().isEmpty()) {
-	    	validationErrors.add("Name","Can't be empty");
-	    	commandInvalid = true;
-	    }
-	    if (cmd.getCity().isEmpty()) {
-	    	validationErrors.add("City","Can't be empty");
-	    	commandInvalid = true;
-	    }
-	    if (commandInvalid) throw new CommandInvalidException(validationErrors);
-    }
+	public void validateCinemaParameters(CreateCinemaCommand cmd) {
+		boolean commandInvalid = false;
+		if (cmd.getName().isEmpty()) {
+			validationErrors.add("Name", "Can't be empty");
+			commandInvalid = true;
+		}
+		if (cmd.getCity().isEmpty()) {
+			validationErrors.add("City", "Can't be empty");
+			commandInvalid = true;
+		}
+		if (commandInvalid) throw new CommandInvalidException(validationErrors);
+	}
 
-    private boolean isPresentInRepository(Optional<Cinema> cinema) {
-        return cinema.isPresent();
-    }
+	private boolean isPresentInRepository(Optional<Cinema> cinema) {
+		return cinema.isPresent();
+	}
 }

@@ -8,20 +8,20 @@ import javax.persistence.*;
 @Table(name = "cinemas")
 public class Cinema {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    private String name;
-    private String city;
+	private String name;
+	private String city;
 
-    public Cinema() {
-    }
+	public Cinema() {
+	}
 
-    public Cinema(CreateCinemaCommand createCinemaCommand) {
-        this.name = createCinemaCommand.getName();
-        this.city = createCinemaCommand.getCity();
-    }
+	public Cinema(CreateCinemaCommand createCinemaCommand) {
+		this.name = createCinemaCommand.getName();
+		this.city = createCinemaCommand.getCity();
+	}
 
 	public Long getId() {
 		return id;

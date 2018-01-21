@@ -12,34 +12,34 @@ import java.util.Optional;
 @Component
 public class JPACinemaRepository implements CinemaRepository {
 
-    private EntityManager entityManager;
+	private EntityManager entityManager;
 
-    public JPACinemaRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+	public JPACinemaRepository(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
-    @Override
-    public void save(Cinema cinema) {
-        entityManager.persist(cinema);
-    }
+	@Override
+	public void save(Cinema cinema) {
+		entityManager.persist(cinema);
+	}
 
 	@Override
 	public Cinema get(Long id) {
 		Cinema cinema = entityManager.find(Cinema.class, id);
-		if(cinema == null)
+		if (cinema == null)
 			throw new NoSuchEntityException();
 		return cinema;
 	}
 
 	@Override
-    public Optional<Cinema> findByNameAndCity(String name, String city) {
-        try {
-            Query query = entityManager.createQuery("FROM Cinema c WHERE c.name = :name AND c.city = :city")
-                    .setParameter("name", name)
-                    .setParameter("city", city);
-            return Optional.of((Cinema) query.getSingleResult());
-        } catch (NoResultException ex) {
-            return Optional.empty();
-        }
-    }
+	public Optional<Cinema> findByNameAndCity(String name, String city) {
+		try {
+			Query query = entityManager.createQuery("FROM Cinema c WHERE c.name = :name AND c.city = :city")
+					.setParameter("name", name)
+					.setParameter("city", city);
+			return Optional.of((Cinema) query.getSingleResult());
+		} catch (NoResultException ex) {
+			return Optional.empty();
+		}
+	}
 }

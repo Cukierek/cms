@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import pl.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.bottega.cms.model.commands.CreateMovieCommand;
-import pl.bottega.cms.model.commands.CreateShowsCommand;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

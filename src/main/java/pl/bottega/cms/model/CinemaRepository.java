@@ -4,9 +4,9 @@ import java.util.Optional;
 
 public interface CinemaRepository {
 
-    void save(Cinema cinema);
+	void save(Cinema cinema);
 
-    Cinema get(Long id);
+	Cinema get(Long id);
 
-    Optional<Cinema> findByNameAndCity(String name, String city);
+	Optional<Cinema> findByNameAndCity(String name, String city);
 }

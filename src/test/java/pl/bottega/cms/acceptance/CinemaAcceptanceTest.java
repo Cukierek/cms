@@ -1,23 +1,18 @@
 package pl.bottega.cms.acceptance;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.support.TransactionTemplate;
 import pl.bottega.cms.application.CinemaDto;
 import pl.bottega.cms.application.CinemaFinder;
 import pl.bottega.cms.application.CreateCinemaHandler;
 import pl.bottega.cms.infrastructure.NoSuchEntityException;
-import pl.bottega.cms.model.Cinema;
-import pl.bottega.cms.model.commands.Command;
 import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.model.commands.CreateCinemaCommand;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -46,7 +41,7 @@ public class CinemaAcceptanceTest extends AcceptanceTest {
 	@Test
 	public void shouldSaveAllCinemas() {
 		// GIVEN
-		CreateCinemaCommand c1 = new CreateCinemaCommand("Felicity","Poznań");
+		CreateCinemaCommand c1 = new CreateCinemaCommand("Felicity", "Poznań");
 		CreateCinemaCommand c2 = new CreateCinemaCommand("Plaza", "Gdynia");
 		CreateCinemaCommand c3 = new CreateCinemaCommand("Złote Tarasy", "Warszawa");
 		createCinemaHandler.handle(c1);

@@ -52,7 +52,7 @@ public class CreateShowsCommand implements Command {
 	}
 
 	public boolean isHasDates() {
-		if (dates != null){
+		if (dates != null) {
 			if (!dates.isEmpty()) hasDates = true;
 		}
 		return hasDates;
@@ -68,11 +68,11 @@ public class CreateShowsCommand implements Command {
 	public void validate(ValidationErrors errors) {
 		validatePresence(errors, "movieId", movieId);
 		validatePresence(errors, "cinemaId", cinemaId);
-		if(showsCalendar != null) {
+		if (showsCalendar != null) {
 			hasShowsCalendar = true;
 			validatePresence(errors, "showsCalendar", showsCalendar);
 		}
-		if(dates != null) {
+		if (dates != null) {
 			hasDates = true;
 			validatePresence(errors, "dates", dates);
 		}

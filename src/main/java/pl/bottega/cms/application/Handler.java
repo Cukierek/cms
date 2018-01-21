@@ -4,12 +4,12 @@ import pl.bottega.cms.model.commands.Command;
 
 public interface Handler<C extends Command> {
 
-    void handle(C command);
+	void handle(C command);
 
-    Class<? extends Command> getSupportedCommandClass();
+	Class<? extends Command> getSupportedCommandClass();
 
-    default boolean canHandle(Command command) {
-        return command.getClass().equals(getSupportedCommandClass());
-    }
+	default boolean canHandle(Command command) {
+		return command.getClass().equals(getSupportedCommandClass());
+	}
 
 }

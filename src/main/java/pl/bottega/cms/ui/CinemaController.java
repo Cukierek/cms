@@ -12,28 +12,28 @@ import java.util.List;
 @RestController
 public class CinemaController {
 
-    private CinemaFinder cinemaFinder;
-    private CommandGateway gateway;
+	private CinemaFinder cinemaFinder;
+	private CommandGateway gateway;
 
-    public CinemaController(CinemaFinder cinemaFinder, CommandGateway gateway) {
-        this.cinemaFinder = cinemaFinder;
-        this.gateway = gateway;
-    }
+	public CinemaController(CinemaFinder cinemaFinder, CommandGateway gateway) {
+		this.cinemaFinder = cinemaFinder;
+		this.gateway = gateway;
+	}
 
-    @PutMapping
-    public void create(@RequestBody CreateCinemaCommand cmd){
-        gateway.execute(cmd);
-    }
+	@PutMapping
+	public void create(@RequestBody CreateCinemaCommand cmd) {
+		gateway.execute(cmd);
+	}
 
-    @GetMapping("/cinemas")
-    public List<CinemaDto> getAllCinemas() {
-        return cinemaFinder.getAll();
-    }
+	@GetMapping("/cinemas")
+	public List<CinemaDto> getAllCinemas() {
+		return cinemaFinder.getAll();
+	}
 
-    @PutMapping("/{cinemaId}/shows")
-    public void createShows(@PathVariable Long cinemaId, @RequestBody CreateShowsCommand cmd) {
-    	cmd.setCinemaId(cinemaId);
-    	gateway.execute(cmd);
-    }
+	@PutMapping("/{cinemaId}/shows")
+	public void createShows(@PathVariable Long cinemaId, @RequestBody CreateShowsCommand cmd) {
+		cmd.setCinemaId(cinemaId);
+		gateway.execute(cmd);
+	}
 
 }

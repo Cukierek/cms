@@ -11,7 +11,7 @@ import pl.bottega.cms.model.commands.CreateShowsCommand;
 import java.util.Collection;
 
 @Component
-public class CreateShowsHandler implements Handler<CreateShowsCommand>{
+public class CreateShowsHandler implements Handler<CreateShowsCommand> {
 
 	private ShowRepository showRepository;
 	private ShowFactory showFactory;

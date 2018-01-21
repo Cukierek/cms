@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
-import pl.bottega.cms.acceptance.AcceptanceTest;
 import pl.bottega.cms.model.*;
 import pl.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.bottega.cms.model.commands.CreateMovieCommand;
 import pl.bottega.cms.model.commands.CreateShowsCommand;
 
 import javax.persistence.EntityManager;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -85,7 +83,7 @@ public class ShowAcceptanceTest extends AcceptanceTest {
 	private CreateShowsCommand createShows(String parameterSet) {
 		CreateShowsCommand csc = new CreateShowsCommand();
 		switch (parameterSet) {
-			case "dates" : {
+			case "dates": {
 				csc.setCinemaId(1L);
 				csc.setMovieId(1L);
 				csc.setDates(new HashSet<>(Arrays.asList(LocalDateTime.parse("2017-01-01T10:30:00"),
@@ -93,7 +91,7 @@ public class ShowAcceptanceTest extends AcceptanceTest {
 						LocalDateTime.parse("2017-01-01T20:30:00"), LocalDateTime.parse("2017-01-01T22:15:00"))));
 				return csc;
 			}
-			case "calendar" : {
+			case "calendar": {
 				csc.setCinemaId(1L);
 				csc.setMovieId(1L);
 				ShowsCalendar showsCalendar = new ShowsCalendar();
@@ -104,7 +102,8 @@ public class ShowAcceptanceTest extends AcceptanceTest {
 				csc.setShowsCalendar(showsCalendar);
 				return csc;
 			}
-			default: return null;
+			default:
+				return null;
 		}
 	}
 
