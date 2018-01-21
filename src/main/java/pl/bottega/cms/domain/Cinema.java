@@ -13,8 +13,10 @@ public class Cinema {
     private Long id;
 
     private String name;
-
     private String city;
+
+    public Cinema() {
+    }
 
     public Cinema(CreateCinemaCommand createCinemaCommand) {
         this.name = createCinemaCommand.getName();

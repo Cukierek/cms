@@ -31,24 +31,15 @@ public class JPACinemaFinderTest extends AcceptanceTest {
     @Autowired
     private CinemaFinder cinemaFinder;
 
-
     private void createCinemas() {
         tt.execute(c -> {
-	        CreateCinemaCommand ccc = new CreateCinemaCommand();
-
-	        ccc.setName("Felicity");
-	        ccc.setCity("Lublin");
-	        entityManager.persist(new Cinema(ccc));
-
-	        ccc.setName("Plaza");
-	        ccc.setCity("Lublin");
-	        entityManager.persist(new Cinema(ccc));
-
-	        ccc.setName("Złote Tarasy");
-	        ccc.setCity("Warszawa");
-	        entityManager.persist(new Cinema(ccc));
-
-	        return null;
+            CreateCinemaCommand c1 = new CreateCinemaCommand("Felicity","Lublin");
+            CreateCinemaCommand c2 = new CreateCinemaCommand("Plaza", "Lublin");
+            CreateCinemaCommand c3 = new CreateCinemaCommand("Złote Tarasy", "Warszawa");
+            entityManager.persist(new Cinema(c1));
+            entityManager.persist(new Cinema(c2));
+            entityManager.persist(new Cinema(c3));
+            return null;
         });
     }
 
@@ -62,6 +53,13 @@ public class JPACinemaFinderTest extends AcceptanceTest {
 
         //when
         assertEquals(3, result.size());
+    }
+
+    @Test(expected = NoSuchEntityException.class)
+    public void  shouldNotFindCinemasWhileNoCinemaInDatabase() {
+        //when
+        List<CinemaDto> result = cinemaFinder.getAll();
+
     }
 
 }

@@ -5,6 +5,9 @@ import pl.bottega.cms.domain.Cinema;
 import pl.bottega.cms.domain.CinemaRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.util.Optional;
 
 @Component
 public class JPACinemaRepository implements CinemaRepository {
@@ -20,11 +23,15 @@ public class JPACinemaRepository implements CinemaRepository {
         entityManager.persist(cinema);
     }
 
-	@Override
-	public Cinema get(Long id) {
-		Cinema movie = entityManager.find(Cinema.class, id);
-		if(movie == null)
-			throw new NoSuchEntityException();
-		return movie;
-	}
+    @Override
+    public Optional<Cinema> findByNameAndCity(String name, String city) {
+        try {
+            Query query = entityManager.createQuery("FROM Cinema c WHERE c.name = :name AND c.city = :city")
+                    .setParameter("name", name)
+                    .setParameter("city", city);
+            return Optional.of((Cinema) query.getSingleResult());
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
 }

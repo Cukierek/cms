@@ -10,7 +10,6 @@ import pl.bottega.cms.domain.commands.CreateShowsCommand;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cinemas")
 public class CinemaController {
 
     private CinemaFinder cinemaFinder;
@@ -26,8 +25,8 @@ public class CinemaController {
         gateway.execute(cmd);
     }
 
-    @GetMapping
-    public List<CinemaDto> getAllCinemas(@PathVariable String city) {
+    @GetMapping("/cinemas")
+    public List<CinemaDto> getAllCinemas() {
         return cinemaFinder.getAll();
     }
 
