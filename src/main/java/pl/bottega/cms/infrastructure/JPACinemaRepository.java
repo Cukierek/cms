@@ -19,4 +19,12 @@ public class JPACinemaRepository implements CinemaRepository {
     public void save(Cinema cinema) {
         entityManager.persist(cinema);
     }
+
+	@Override
+	public Cinema get(Long id) {
+		Cinema movie = entityManager.find(Cinema.class, id);
+		if(movie == null)
+			throw new NoSuchEntityException();
+		return movie;
+	}
 }

@@ -23,6 +23,4 @@ public class MovieController {
         commandGateway.execute(cmd);
     }
 
-
-
 }

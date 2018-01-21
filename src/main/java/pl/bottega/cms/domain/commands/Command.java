@@ -29,5 +29,11 @@ public interface Command {
         }
     }
 
+    default void validateRequestFormat(ValidationErrors errors, boolean condition, String requestValidityCondition) {
+    	if (!condition) {
+    		errors.add(requestValidityCondition, "condition is not met");
+	    }
+    }
+
 
 }

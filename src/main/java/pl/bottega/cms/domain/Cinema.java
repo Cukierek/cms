@@ -20,4 +20,8 @@ public class Cinema {
         this.name = createCinemaCommand.getName();
         this.city = createCinemaCommand.getCity();
     }
+
+	public Long getId() {
+		return id;
+	}
 }

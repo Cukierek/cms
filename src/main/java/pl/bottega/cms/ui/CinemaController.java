@@ -5,10 +5,12 @@ import pl.bottega.cms.api.CinemaDto;
 import pl.bottega.cms.api.CinemaFinder;
 import pl.bottega.cms.api.CommandGateway;
 import pl.bottega.cms.domain.commands.CreateCinemaCommand;
+import pl.bottega.cms.domain.commands.CreateShowsCommand;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/cinemas")
 public class CinemaController {
 
     private CinemaFinder cinemaFinder;
@@ -19,14 +21,20 @@ public class CinemaController {
         this.gateway = gateway;
     }
 
-    @PutMapping("/cinemas")
+    @PutMapping
     public void create(@RequestBody CreateCinemaCommand cmd){
         gateway.execute(cmd);
     }
 
-    @GetMapping("/cinemas")
+    @GetMapping
     public List<CinemaDto> getAllCinemas(@PathVariable String city) {
         return cinemaFinder.getAll();
+    }
+
+    @PutMapping("/{cinemaId}/shows")
+    public void createShows(@PathVariable Long cinemaId, @RequestBody CreateShowsCommand cmd) {
+    	cmd.setCinemaId(cinemaId);
+    	gateway.execute(cmd);
     }
 
 }

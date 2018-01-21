@@ -1,8 +1,6 @@
 package pl.bottega.cms.domain.commands;
 
-
 import java.util.Set;
-
 
 public class CreateMovieCommand implements Command {
 
@@ -13,9 +11,7 @@ public class CreateMovieCommand implements Command {
     private Integer minAge;
     private Integer length;
 
-
-
-    public String getTitle() {
+	public String getTitle() {
         return title;
     }
 
@@ -71,6 +67,4 @@ public class CreateMovieCommand implements Command {
         validatePresence(errors, "minAge", minAge);
         validatePresence(errors, "length", length);
     }
-
-
 }

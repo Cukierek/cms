@@ -34,10 +34,21 @@ public class JPACinemaFinderTest extends AcceptanceTest {
 
     private void createCinemas() {
         tt.execute(c -> {
-            entityManager.persist(new Cinema(new CreateCinemaCommand("Felicty", "Lublin")));
-            entityManager.persist(new Cinema(new CreateCinemaCommand("Plaza", "Lublin")));
-            entityManager.persist(new Cinema(new CreateCinemaCommand("Złote tarasy", "Warszawa")));
-            return null;
+	        CreateCinemaCommand ccc = new CreateCinemaCommand();
+
+	        ccc.setName("Felicity");
+	        ccc.setCity("Lublin");
+	        entityManager.persist(new Cinema(ccc));
+
+	        ccc.setName("Plaza");
+	        ccc.setCity("Lublin");
+	        entityManager.persist(new Cinema(ccc));
+
+	        ccc.setName("Złote Tarasy");
+	        ccc.setCity("Warszawa");
+	        entityManager.persist(new Cinema(ccc));
+
+	        return null;
         });
     }
 
