@@ -11,7 +11,7 @@ import pl.bottega.cms.model.commands.ValidationErrors;
 import javax.transaction.Transactional;
 
 @Component
-public class CreateMovieHandler implements Handler<CreateMovieCommand> {
+public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 
 	private MovieRepository movieRepository;
 	private ValidationErrors validationErrors;
@@ -23,10 +23,11 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand> {
 
 	@Override
 	@Transactional
-	public void handle(CreateMovieCommand cmd) {
+	public Void handle(CreateMovieCommand cmd) {
 		validateMovieParameters(cmd);
 		Movie movie = new Movie(cmd);
 		movieRepository.save(movie);
+		return null;
 	}
 
 	public void validateMovieParameters(CreateMovieCommand cmd) {
@@ -60,6 +61,6 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand> {
 
 	@Override
 	public Class<? extends Command> getSupportedCommandClass() {
-		return null;
+		return CreateMovieCommand.class;
 	}
 }
