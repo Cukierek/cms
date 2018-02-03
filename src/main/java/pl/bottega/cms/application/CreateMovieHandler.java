@@ -3,7 +3,10 @@ package pl.bottega.cms.application;
 import org.springframework.stereotype.Component;
 import pl.bottega.cms.model.Movie;
 import pl.bottega.cms.model.MovieRepository;
-import pl.bottega.cms.model.commands.*;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CommandInvalidException;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.ValidationErrors;
 
 import javax.transaction.Transactional;
 

@@ -31,11 +31,9 @@ public class JPACinemaFinder implements CinemaFinder {
 		String jpql =
 				"SELECT NEW pl.bottega.cms.application.CinemaDto(c.id, c.name, c.city) " +
 				"FROM Cinema c " +
-				"WHERE c.name=:name AND c.city=:city";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("name", name);
-		query.setParameter("city", city);
+				"WHERE c.name LIKE :name AND c.city LIKE :city";
+		Query query = entityManager.createQuery(jpql).setParameter("name", name).setParameter("city", city);
 		CinemaDto result = (CinemaDto) query.getSingleResult();
-		return null;
+		return result;
 	}
 }

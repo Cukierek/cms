@@ -31,7 +31,7 @@ public class CinemaController {
 		return cinemaFinder.getAll();
 	}
 
-	@PutMapping("/cinemas/{cinemaId}/shows")
+	@PutMapping("/{cinemaId}/shows")
 	public void createShows(@PathVariable Long cinemaId, @RequestBody CreateShowsCommand cmd) {
 		cmd.setCinemaId(cinemaId);
 		gateway.execute(cmd);
