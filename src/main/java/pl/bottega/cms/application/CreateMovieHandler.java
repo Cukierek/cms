@@ -41,11 +41,11 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 			commandInvalid = true;
 		}
 		if (cmd.getActors().isEmpty()) {
-			validationErrors.add("actors", "Can't be empty");
+			validationErrors.add("actors", "At least one is required");
 			commandInvalid = true;
 		}
 		if (cmd.getGenres().isEmpty()) {
-			validationErrors.add("genres", "Can't be empty");
+			validationErrors.add("genres", "At least one is required");
 			commandInvalid = true;
 		}
 		if (cmd.getMinAge() == null) {
@@ -64,6 +64,8 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 			validationErrors.add("length", "Can't be less than 0");
 			commandInvalid = true;
 		}
+
+		System.out.println("VALIDATION ERRORS " + validationErrors.getMessage());
 		if (commandInvalid) throw new CommandInvalidException(validationErrors);
 	}
 
