@@ -12,7 +12,7 @@ import pl.bottega.cms.model.commands.ValidationErrors;
 import java.util.Collection;
 
 @Component
-public class CreateShowsHandler implements Handler<CreateShowsCommand> {
+public class CreateShowsHandler implements Handler<CreateShowsCommand, Void> {
 
 	private ShowRepository showRepository;
 	private ShowFactory showFactory;
@@ -24,12 +24,13 @@ public class CreateShowsHandler implements Handler<CreateShowsCommand> {
 
 	@Override
 	@Transactional
-	public void handle(CreateShowsCommand command) {
+	public Void handle(CreateShowsCommand command) {
 		ValidationErrors errors = showFactory.validate(command);
 		if (!errors.any()) {
 			Collection<Show> shows = showFactory.createShows(command);
 			shows.stream().forEach(show -> showRepository.save(show));
 		}
+		return  null;
 	}
 
 	@Override

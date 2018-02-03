@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Component
 
-public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand> {
+public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand, Void> {
 
     MovieRepository movieRepository;
     ValidationErrors validationErrors;
@@ -27,7 +27,7 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand> {
 
     @Override
     @Transactional
-    public void handle(SetTicketPricesCommand command) {
+    public Void handle(SetTicketPricesCommand command) {
 
         validatePrices(command.getPrices());
 
@@ -35,9 +35,10 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand> {
         TicketPrices ticketPrices = new TicketPrices(command.getPrices());
         movie.setPrices(ticketPrices);
         movieRepository.save(movie);
+        return null;
     }
 
-    private void validatePrices(Map<String, BigDecimal> prices) {
+    private Void validatePrices(Map<String, BigDecimal> prices) {
         boolean commandInvalid = false;
         if (!(prices.containsKey("regular"))) {
             validationErrors.add("regular price", "Regular price must be defined");
@@ -50,6 +51,7 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand> {
 
         if (commandInvalid)
             throw new CommandInvalidException(validationErrors);
+        return null;
 
     }
 

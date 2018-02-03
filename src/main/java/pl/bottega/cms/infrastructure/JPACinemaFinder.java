@@ -36,6 +36,6 @@ public class JPACinemaFinder implements CinemaFinder {
 		query.setParameter("name", name);
 		query.setParameter("city", city);
 		CinemaDto result = (CinemaDto) query.getSingleResult();
-		return null;
+		return result;
 	}
 }

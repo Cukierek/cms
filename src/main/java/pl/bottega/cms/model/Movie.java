@@ -76,6 +76,10 @@ public class Movie {
 		return genres;
 	}
 
+	public TicketPrices getTicketPrices() {
+		return ticketPrices;
+	}
+
 	public Integer getMinAge() {
 		return minAge;
 	}
@@ -87,5 +91,6 @@ public class Movie {
 	public void setPrices(TicketPrices ticketPrices){
 		this.ticketPrices = ticketPrices;
 			}
+
 
 }

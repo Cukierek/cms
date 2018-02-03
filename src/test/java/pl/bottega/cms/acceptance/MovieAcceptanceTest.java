@@ -76,4 +76,11 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		// WHEN
 		createMovieHandler.handle(cmc);
 	}
+
+
+
+
+
+
+
 }

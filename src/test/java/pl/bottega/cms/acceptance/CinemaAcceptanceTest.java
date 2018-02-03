@@ -39,6 +39,7 @@ public class CinemaAcceptanceTest extends AcceptanceTest {
 	}
 
 	private void putCinema(String name, String city) {
+
 		createCinemaHandler.handle(buildCinemaCommand(name, city));
 	}
 
