@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.bottega.cms.application.CinemaDto;
 import pl.bottega.cms.application.CinemaFinder;
 import pl.bottega.cms.application.CreateCinemaHandler;
-import pl.bottega.cms.infrastructure.NoSuchEntityException;
 import pl.bottega.cms.model.Cinema;
 import pl.bottega.cms.model.CinemaRepository;
 import pl.bottega.cms.model.commands.CommandInvalidException;

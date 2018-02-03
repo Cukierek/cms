@@ -17,16 +17,15 @@ public class Movie {
 
 	private String description;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> actors;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> genres;
 
 	private Integer minAge;
 
 	private Integer length;
-
 
 	public Movie() {
 	}
