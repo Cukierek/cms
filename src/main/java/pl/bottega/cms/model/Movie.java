@@ -1,6 +1,6 @@
 package pl.bottega.cms.model;
 
-import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.AddMovieCommand;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -31,13 +31,23 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(CreateMovieCommand cmd) {
-		this.actors = cmd.getActors();
-		this.description = cmd.getDescription();
-		this.genres = cmd.getGenres();
-		this.length = cmd.getLength();
-		this.minAge = cmd.getMinAge();
-		this.title = cmd.getTitle();
+	public Movie(String title, String description, Set<String> actors, Set<String> genres, Integer minAge, Integer length) {
+		this.title = title;
+		this.description = description;
+		this.actors = actors;
+		this.genres = genres;
+		this.minAge = minAge;
+		this.length = length;
+	}
+
+
+		public Movie(AddMovieCommand amd) {
+		this.actors = amd.getActors();
+		this.description = amd.getDescription();
+		this.genres = amd.getGenres();
+		this.length = amd.getLength();
+		this.minAge = amd.getMinAge();
+		this.title = amd.getTitle();
 	}
 
 

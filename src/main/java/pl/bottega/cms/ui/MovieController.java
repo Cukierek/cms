@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.bottega.cms.application.CommandGateway;
-import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.AddMovieCommand;
 
 
 @RestController
@@ -19,8 +19,11 @@ public class MovieController {
 	}
 
 	@PutMapping("/create")
-	public void create(@RequestBody CreateMovieCommand cmd) {
+	public void create(@RequestBody AddMovieCommand cmd) {
 		commandGateway.execute(cmd);
 	}
+
+
+
 
 }
