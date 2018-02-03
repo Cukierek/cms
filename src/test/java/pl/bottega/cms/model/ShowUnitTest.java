@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ShowTest {
+public class ShowUnitTest {
 	@Test
-	public void shouldCreateShow() {
+	public void shouldCreateShowFromCommand() {
 		// GIVEN
 		CreateCinemaCommand ccc = new CreateCinemaCommand();
 

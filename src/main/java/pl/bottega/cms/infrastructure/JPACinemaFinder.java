@@ -22,8 +22,6 @@ public class JPACinemaFinder implements CinemaFinder {
 		String jpql = "SELECT NEW pl.bottega.cms.application.CinemaDto(c.id, c.name, c.city) FROM Cinema c";
 		Query query = entityManager.createQuery(jpql);
 		List<CinemaDto> result = query.getResultList();
-		if (result.size() == 0)
-			throw new NoSuchEntityException();
 		return result;
 	}
 }

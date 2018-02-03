@@ -18,12 +18,8 @@ public class MovieController {
 		this.commandGateway = commandGateway;
 	}
 
-	@PutMapping("/create")
+	@PutMapping
 	public void create(@RequestBody CreateMovieCommand cmd) {
 		commandGateway.execute(cmd);
 	}
-
-
-
-
 }

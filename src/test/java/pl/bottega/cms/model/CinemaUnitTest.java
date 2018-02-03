@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import pl.bottega.cms.model.commands.CreateCinemaCommand;
 
-public class CinemaTest {
+public class CinemaUnitTest {
 	@Test
 	public void shouldCreateCinemaFromCommand() {
 		// GIVEN

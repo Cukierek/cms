@@ -40,16 +40,14 @@ public class Movie {
 		this.length = length;
 	}
 
-
-		public Movie(CreateMovieCommand amd) {
-		this.actors = amd.getActors();
-		this.description = amd.getDescription();
-		this.genres = amd.getGenres();
-		this.length = amd.getLength();
-		this.minAge = amd.getMinAge();
-		this.title = amd.getTitle();
+	public Movie(CreateMovieCommand cmc) {
+		this.actors = cmc.getActors();
+		this.description = cmc.getDescription();
+		this.genres = cmc.getGenres();
+		this.length = cmc.getLength();
+		this.minAge = cmc.getMinAge();
+		this.title = cmc.getTitle();
 	}
-
 
 	public Long getId() {
 		return id;

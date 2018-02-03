@@ -19,13 +19,6 @@ import java.util.Set;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MovieAcceptanceTest extends AcceptanceTest {
-
-	@Autowired
-	private TransactionTemplate tt;
-
-	@Autowired
-	private EntityManager entityManager;
-
 	@Autowired
 	private CreateMovieHandler createMovieHandler;
 
