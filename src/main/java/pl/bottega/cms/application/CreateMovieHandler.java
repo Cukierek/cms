@@ -56,6 +56,14 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 			validationErrors.add("Minimal age", "Can't be less than 0");
 			commandInvalid = true;
 		}
+		if (cmd.getLength() == null) {
+			validationErrors.add("Length", "Can't be empty");
+			commandInvalid = true;
+		}
+		if (cmd.getLength() < 0) {
+			validationErrors.add("Length", "Can't be less than 0");
+			commandInvalid = true;
+		}
 		if (commandInvalid) throw new CommandInvalidException(validationErrors);
 	}
 
