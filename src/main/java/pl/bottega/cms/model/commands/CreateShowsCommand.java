@@ -1,5 +1,6 @@
 package pl.bottega.cms.model.commands;
 
+import org.apache.tomcat.jni.Local;
 import pl.bottega.cms.model.ShowsCalendar;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ public class CreateShowsCommand implements Command {
 
 	private Long movieId;
 	private Long cinemaId;
-	private Set<LocalDateTime> dates;
+	private Set<String> dates;
 	private ShowsCalendar showsCalendar;
 
 	private boolean hasDates = false;
@@ -31,11 +32,11 @@ public class CreateShowsCommand implements Command {
 		this.cinemaId = cinemaId;
 	}
 
-	public Set<LocalDateTime> getDates() {
+	public Set<String> getDates() {
 		return dates;
 	}
 
-	public void setDates(Set<LocalDateTime> dates) {
+	public void setDates(Set<String> dates) {
 		this.dates = dates;
 	}
 
@@ -71,6 +72,10 @@ public class CreateShowsCommand implements Command {
 		if (showsCalendar != null) {
 			hasShowsCalendar = true;
 			validatePresence(errors, "showsCalendar", showsCalendar);
+
+			validateFormat(errors,"showsCalendar", showsCalendar.getFromDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
+			validateFormat(errors,"showsCalendar", showsCalendar.getFromDate(), "(\\d{4})\\/(\\d{2})\\/(\\d{2})\\s(\\d{2}):(\\d{2})");
+			validateFormat(errors,"showsCalendar", showsCalendar.getUntilDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
 		}
 		if (dates != null) {
 			hasDates = true;
@@ -78,5 +83,6 @@ public class CreateShowsCommand implements Command {
 		}
 		boolean requestHasTooManyParameters = hasBothParameterSets();
 		validateRequestFormat(errors, requestHasTooManyParameters, "dates or calendar");
+		if(errors.any())throw new CommandInvalidException(errors);
 	}
 }

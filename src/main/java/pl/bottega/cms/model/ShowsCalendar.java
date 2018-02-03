@@ -6,39 +6,39 @@ import java.util.Set;
 
 public class ShowsCalendar {
 
-	private LocalDateTime fromDate, untilDate;
+	private String fromDate, untilDate;
 	private Set<String> weekDays;
-	private Set<LocalTime> hours;
+	private Set<String> hours;
 
-	public LocalDateTime getFromDate() {
+	public String getFromDate() {
 		return fromDate;
 	}
 
-	public LocalDateTime getUntilDate() {
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public String getUntilDate() {
 		return untilDate;
+	}
+
+	public void setUntilDate(String untilDate) {
+		this.untilDate = untilDate;
 	}
 
 	public Set<String> getWeekDays() {
 		return weekDays;
 	}
 
-	public Set<LocalTime> getHours() {
-		return hours;
-	}
-
-	public void setFromDate(LocalDateTime fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public void setUntilDate(LocalDateTime untilDate) {
-		this.untilDate = untilDate;
-	}
-
 	public void setWeekDays(Set<String> weekDays) {
 		this.weekDays = weekDays;
 	}
 
-	public void setHours(Set<LocalTime> hours) {
+	public Set<String> getHours() {
+		return hours;
+	}
+
+	public void setHours(Set<String> hours) {
 		this.hours = hours;
 	}
 }
