@@ -27,6 +27,14 @@ public class Cinema {
 		return id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
 	@Override
 	public String toString() {
 		return "Cinema{" +

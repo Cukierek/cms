@@ -19,7 +19,7 @@ public class CinemaTest {
 		Cinema cinema = new Cinema(ccc);
 
 		// THEN
-		Assert.assertEquals(ccc.getCity(), city);
-		Assert.assertEquals(ccc.getName(), name);
+		Assert.assertEquals(ccc.getCity(), cinema.getCity());
+		Assert.assertEquals(ccc.getName(), cinema.getName());
 	}
 }
