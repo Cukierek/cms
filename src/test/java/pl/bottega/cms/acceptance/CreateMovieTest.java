@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.bottega.cms.application.AddMovieHandler;
-import pl.bottega.cms.model.commands.AddMovieCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class CreateMovieTest extends AcceptanceTest{
     @Test
     public void shouldCreateMovie() {
         // GIVEN
-        AddMovieCommand amc = new AddMovieCommand();
+        CreateMovieCommand amc = new CreateMovieCommand();
         Set<String> actors = new HashSet<String>(Arrays.asList("John Travolta", "Samuel L. Jackson"));
         Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
         String description = "Fajny film";

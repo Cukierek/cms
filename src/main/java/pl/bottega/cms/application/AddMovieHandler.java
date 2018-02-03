@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 import pl.bottega.cms.model.Movie;
 import pl.bottega.cms.model.MovieRepository;
 import pl.bottega.cms.model.commands.Command;
-import pl.bottega.cms.model.commands.AddMovieCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 @Component
-public class AddMovieHandler implements Handler<AddMovieCommand>{
+public class AddMovieHandler implements Handler<CreateMovieCommand>{
 
     private MovieRepository movieRepository;
 
@@ -16,7 +16,7 @@ public class AddMovieHandler implements Handler<AddMovieCommand>{
     }
 
     @Override
-    public void handle(AddMovieCommand cmd) {
+    public void handle(CreateMovieCommand cmd) {
      Movie movie = new Movie(
              cmd.getTitle(),
              cmd.getDescription(),

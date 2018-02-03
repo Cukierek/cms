@@ -1,6 +1,6 @@
 package pl.bottega.cms.model;
 
-import pl.bottega.cms.model.commands.AddMovieCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -41,7 +41,7 @@ public class Movie {
 	}
 
 
-		public Movie(AddMovieCommand amd) {
+		public Movie(CreateMovieCommand amd) {
 		this.actors = amd.getActors();
 		this.description = amd.getDescription();
 		this.genres = amd.getGenres();

@@ -7,6 +7,7 @@ import pl.bottega.cms.model.ShowFactory;
 import pl.bottega.cms.model.ShowRepository;
 import pl.bottega.cms.model.commands.Command;
 import pl.bottega.cms.model.commands.CreateShowsCommand;
+import pl.bottega.cms.model.commands.ValidationErrors;
 
 import java.util.Collection;
 
@@ -24,8 +25,11 @@ public class CreateShowsHandler implements Handler<CreateShowsCommand> {
 	@Override
 	@Transactional
 	public void handle(CreateShowsCommand command) {
-		Collection<Show> shows = showFactory.createShows(command);
-		shows.stream().forEach(show -> showRepository.save(show));
+		ValidationErrors errors = showFactory.validate(command);
+		if (!errors.any()) {
+			Collection<Show> shows = showFactory.createShows(command);
+			shows.stream().forEach(show -> showRepository.save(show));
+		}
 	}
 
 	@Override

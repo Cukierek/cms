@@ -2,7 +2,7 @@ package pl.bottega.cms.model.commands;
 
 import java.util.Set;
 
-public class AddMovieCommand implements Command {
+public class CreateMovieCommand implements Command {
 
 	private String title;
 	private String description;

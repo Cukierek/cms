@@ -3,7 +3,7 @@ package pl.bottega.cms.model;
 import org.junit.Assert;
 import org.junit.Test;
 import pl.bottega.cms.model.commands.CreateCinemaCommand;
-import pl.bottega.cms.model.commands.AddMovieCommand;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class ShowTest {
 		ccc.setName("Felicity");
 		ccc.setCity("Lublin");
 
-		AddMovieCommand cmc = new AddMovieCommand();
+		CreateMovieCommand cmc = new CreateMovieCommand();
 
 		Set<String> actors = new HashSet<String>(Arrays.asList("John Travolta", "Samuel L. Jackson"));
 		Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
