@@ -1,8 +1,11 @@
 package pl.bottega.cms.model;
 
 import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.SetTicketPricesCommand;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -26,6 +29,9 @@ public class Movie {
 	private Integer minAge;
 
 	private Integer length;
+
+	@Embedded
+	private TicketPrices ticketPrices;
 
 
 	public Movie() {
@@ -78,4 +84,9 @@ public class Movie {
 	public Integer getLength() {
 		return length;
 	}
+
+	public void setPrices(TicketPrices ticketPrices){
+		this.ticketPrices = ticketPrices;
+			}
+
 }

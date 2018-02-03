@@ -1,11 +1,13 @@
 package pl.bottega.cms.ui;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.bottega.cms.application.CommandGateway;
+import pl.bottega.cms.model.TicketPrices;
 import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.SetTicketPricesCommand;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 
 @RestController
@@ -15,15 +17,24 @@ public class MovieController {
 	private CommandGateway commandGateway;
 
 	public MovieController(CommandGateway commandGateway) {
+
 		this.commandGateway = commandGateway;
 	}
 
 	@PutMapping("/create")
 	public void create(@RequestBody CreateMovieCommand cmd) {
+
 		commandGateway.execute(cmd);
 	}
 
 
+	@PutMapping("/{movieId}/prices")
+	void setTicketPrices(@PathVariable Integer movieId, @RequestBody Map<String, BigDecimal> prices){
+		SetTicketPricesCommand setTicketPricesCommand = new SetTicketPricesCommand();
+		setTicketPricesCommand.setMovieId(movieId);
+		setTicketPricesCommand.setPrices(prices);
+		commandGateway.execute(setTicketPricesCommand);
+	}
 
 
 }
