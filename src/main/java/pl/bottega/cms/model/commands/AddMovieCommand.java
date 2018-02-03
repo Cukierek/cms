@@ -2,7 +2,7 @@ package pl.bottega.cms.model.commands;
 
 import java.util.Set;
 
-public class CreateMovieCommand implements Command {
+public class AddMovieCommand implements Command {
 
 	private String title;
 	private String description;
@@ -61,10 +61,16 @@ public class CreateMovieCommand implements Command {
 
 	public void validate(ValidationErrors errors) {
 		validatePresence(errors, "title", title);
+		validateMinLength(errors, "title", title, 1);
 		validatePresence(errors, "description", description);
+		validateMinLength(errors, "description", description, 1);
 		validatePresence(errors, "actors", actors);
+		validateMinLength(errors,"actors", String.valueOf(actors), 1);
 		validatePresence(errors, "genres", genres);
+		validateMinLength(errors, "genres", String.valueOf(genres), 1);
 		validatePresence(errors, "minAge", minAge);
+		validateMinLength(errors, "minAge", String.valueOf(minAge), 1);
 		validatePresence(errors, "length", length);
+		validateMinLength(errors, "length", String.valueOf(length), 1);
 	}
 }
