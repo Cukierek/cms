@@ -15,7 +15,7 @@ public class ReservationController {
         this.commandGateway = commandGateway;
     }
 
-    @PutMapping("/create")
+    @PutMapping
     public void create(@RequestBody CreateReservationCommand cmd) {
         commandGateway.execute(cmd);
     }
