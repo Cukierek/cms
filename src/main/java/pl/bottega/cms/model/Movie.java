@@ -30,15 +30,6 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(String title, String description, Set<String> actors, Set<String> genres, Integer minAge, Integer length) {
-		this.title = title;
-		this.description = description;
-		this.actors = actors;
-		this.genres = genres;
-		this.minAge = minAge;
-		this.length = length;
-	}
-
 	public Movie(CreateMovieCommand cmc) {
 		this.actors = cmc.getActors();
 		this.description = cmc.getDescription();
