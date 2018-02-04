@@ -17,7 +17,7 @@ public class Reservation {
     private Customer customer;
 
     @OneToMany
-    private Set<Tickets> tickets;
+    private Set<Ticket> tickets;
 
     @OneToMany
     private Set<Seat> seats;

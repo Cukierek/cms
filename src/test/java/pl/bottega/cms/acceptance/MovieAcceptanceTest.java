@@ -10,13 +10,15 @@ import org.springframework.transaction.support.TransactionTemplate;
 import pl.bottega.cms.application.CreateMovieHandler;
 import pl.bottega.cms.model.Movie;
 import pl.bottega.cms.model.MovieRepository;
+import pl.bottega.cms.model.TicketPrices;
 import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.model.commands.CreateMovieCommand;
 
 import javax.persistence.EntityManager;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.*;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -80,4 +82,61 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		// WHEN
 		createMovieHandler.handle(cmc);
 	}
+
+	@Test
+	public void shouldAddTicketPraises(){
+		//given
+
+		Movie movie = new Movie(createMovieCommand());
+		createMovieHandler.handle(createMovieCommand());
+
+		//when
+
+
+		//then
+//		assertThat(movie.getTicketPrices().getPrices().values()).isEqualTo(ticketPrices.getPrices().values());
+
+
+
+	}
+
+
+
+	private CreateMovieCommand createMovieCommand(){
+		CreateMovieCommand cmc = new CreateMovieCommand();
+		Set<String> actors = new HashSet<>(Arrays.asList("John Travolta", "Samuel L. Jackson"));
+		Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
+		String description = "Fajny film";
+		Integer minAge = 17;
+		Integer length = 180;
+		String title = "Tytuł filmu";
+
+		cmc.setDescription(description);
+		cmc.setActors(actors);
+		cmc.setGenres(genres);
+		cmc.setMinAge(minAge);
+		cmc.setTitle(title);
+		cmc.setLength(length);
+
+		return cmc;
+	}
+
+	public TicketPrices createPraises(){
+
+		Map<String, BigDecimal> prices = new HashMap<>();
+		prices.put("general", BigDecimal.valueOf(9.99));
+		prices.put("student", BigDecimal.valueOf(4.99));
+		prices.put("promo", BigDecimal.valueOf(0.99));
+
+		TicketPrices ticketPrices = new TicketPrices(prices);
+		return ticketPrices;
+
+	}
+
+
+
+
+
+
+
 }

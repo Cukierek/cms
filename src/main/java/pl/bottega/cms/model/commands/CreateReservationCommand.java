@@ -2,7 +2,7 @@ package pl.bottega.cms.model.commands;
 
 import pl.bottega.cms.model.Customer;
 import pl.bottega.cms.model.Seat;
-import pl.bottega.cms.model.Tickets;
+import pl.bottega.cms.model.Ticket;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ public class CreateReservationCommand implements Command {
 
     Long showId;
     Customer customer;
-    Set<Tickets> tickets;
+    Set<Ticket> tickets;
     Set<Seat> seats;
 
     public Long getShowId() {
@@ -29,11 +29,11 @@ public class CreateReservationCommand implements Command {
         this.customer = customer;
     }
 
-    public Set<Tickets> getTickets() {
+    public Set<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<Tickets> tickets) {
+    public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
     }
 
