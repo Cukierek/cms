@@ -1,5 +1,7 @@
 package pl.bottega.cms.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -19,6 +21,7 @@ public class Show {
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
 
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")
 	private LocalDateTime date;
 
 	public Show() {

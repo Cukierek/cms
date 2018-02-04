@@ -1,15 +1,17 @@
 package pl.bottega.cms.model.commands;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import pl.bottega.cms.model.ShowsCalendar;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public class CreateShowsCommand implements Command {
 
-	private Long movieId;
-	private Long cinemaId;
-	private Set<String> dates;
-	private ShowsCalendar showsCalendar;
+	private Long movieId, cinemaId;
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")
+	private Set<LocalDateTime> dates;
+	private ShowsCalendar calendar;
 
 	private boolean hasDates = false;
 
@@ -29,20 +31,20 @@ public class CreateShowsCommand implements Command {
 		this.cinemaId = cinemaId;
 	}
 
-	public Set<String> getDates() {
+	public Set<LocalDateTime> getDates() {
 		return dates;
 	}
 
-	public void setDates(Set<String> dates) {
+	public void setDates(Set<LocalDateTime> dates) {
 		this.dates = dates;
 	}
 
-	public ShowsCalendar getShowsCalendar() {
-		return showsCalendar;
+	public ShowsCalendar getCalendar() {
+		return calendar;
 	}
 
-	public void setShowsCalendar(ShowsCalendar showsCalendar) {
-		this.showsCalendar = showsCalendar;
+	public void setCalendar(ShowsCalendar calendar) {
+		this.calendar = calendar;
 	}
 
 	public boolean hasDates() {
@@ -59,13 +61,14 @@ public class CreateShowsCommand implements Command {
 		}
 
 		if (hasDates == false) {
-			validatePresence(errors, "showsCalendar", showsCalendar);
-			validateFormat(errors,"showsCalendar", showsCalendar.getFromDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
-			validateFormat(errors,"showsCalendar", showsCalendar.getFromDate(), "(\\d{4})\\/(\\d{2})\\/(\\d{2})\\s(\\d{2}):(\\d{2})");
-			validateFormat(errors,"showsCalendar", showsCalendar.getUntilDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
+
+			validatePresence(errors, "calendar", calendar);
+//			validateFormat(errors,"calendar", calendar.getFromDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
+//			validateFormat(errors,"calendar", calendar.getFromDate(), "(\\d{4})\\/(\\d{2})\\/(\\d{2})\\s(\\d{2}):(\\d{2})");
+//			validateFormat(errors,"calendar", calendar.getUntilDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
 		}
 
-		if (hasDates && showsCalendar != null) validateRequestFormat(errors, false, "dates or calendar");
+		if (hasDates && calendar != null) validateRequestFormat(errors, false, "dates or calendar");
 		if(errors.any())throw new CommandInvalidException(errors);
 	}
 }

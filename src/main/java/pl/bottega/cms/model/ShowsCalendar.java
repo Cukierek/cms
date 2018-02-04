@@ -1,28 +1,32 @@
 package pl.bottega.cms.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
 public class ShowsCalendar {
 
-	private String fromDate, untilDate;
-	private Set<String> weekDays;
-	private Set<String> hours;
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")
+	private LocalDateTime fromDate, untilDate;
 
-	public String getFromDate() {
+	private Set<String> weekDays;
+	private Set<LocalTime> hours;
+
+	public LocalDateTime getFromDate() {
 		return fromDate;
 	}
 
-	public void setFromDate(String fromDate) {
+	public void setFromDate(LocalDateTime fromDate) {
 		this.fromDate = fromDate;
 	}
 
-	public String getUntilDate() {
+	public LocalDateTime getUntilDate() {
 		return untilDate;
 	}
 
-	public void setUntilDate(String untilDate) {
+	public void setUntilDate(LocalDateTime untilDate) {
 		this.untilDate = untilDate;
 	}
 
@@ -34,11 +38,11 @@ public class ShowsCalendar {
 		this.weekDays = weekDays;
 	}
 
-	public Set<String> getHours() {
+	public Set<LocalTime> getHours() {
 		return hours;
 	}
 
-	public void setHours(Set<String> hours) {
+	public void setHours(Set<LocalTime> hours) {
 		this.hours = hours;
 	}
 }

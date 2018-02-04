@@ -49,7 +49,7 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		cmc.setLength(length);
 
 		// WHEN
-		Void nothing = createMovieHandler.handle(cmc);
+		createMovieHandler.handle(cmc);
 
 		// THEN
 		Movie movie = movieRepository.get(1L);

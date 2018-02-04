@@ -24,49 +24,8 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 	@Override
 	@Transactional
 	public Void handle(CreateMovieCommand cmd) {
-		validateMovieParameters(cmd);
 		Movie movie = new Movie(cmd);
 		movieRepository.save(movie);
-		return null;
-	}
-
-	public Void validateMovieParameters(CreateMovieCommand cmd) {
-		boolean commandInvalid = false;
-		if (cmd.getTitle().isEmpty()) {
-			validationErrors.add("title", "Can't be empty");
-			commandInvalid = true;
-		}
-		if (cmd.getDescription().isEmpty()) {
-			validationErrors.add("description", "Can't be empty");
-			commandInvalid = true;
-		}
-		if (cmd.getActors().isEmpty()) {
-			validationErrors.add("actors", "At least one is required");
-			commandInvalid = true;
-		}
-		if (cmd.getGenres().isEmpty()) {
-			validationErrors.add("genres", "At least one is required");
-			commandInvalid = true;
-		}
-		if (cmd.getMinAge() == null) {
-			validationErrors.add("minAge", "Can't be empty");
-			commandInvalid = true;
-		}
-		if (cmd.getMinAge() < 0) {
-			validationErrors.add("minAge", "Can't be less than 0");
-			commandInvalid = true;
-		}
-		if (cmd.getLength() == null) {
-			validationErrors.add("length", "Can't be empty");
-			commandInvalid = true;
-		}
-		if (cmd.getLength() < 0) {
-			validationErrors.add("length", "Can't be less than 0");
-			commandInvalid = true;
-		}
-
-		System.out.println("VALIDATION ERRORS " + validationErrors.getMessage());
-		if (commandInvalid) throw new CommandInvalidException(validationErrors);
 		return null;
 	}
 

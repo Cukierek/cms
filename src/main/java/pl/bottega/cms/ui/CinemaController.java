@@ -36,5 +36,4 @@ public class CinemaController {
 		cmd.setCinemaId(cinemaId);
 		gateway.execute(cmd);
 	}
-
 }
