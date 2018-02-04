@@ -1,7 +1,7 @@
 package pl.bottega.cms.model;
 
-import pl.bottega.cms.model.commands.CreateReservationCommand;
 
+import pl.bottega.cms.model.commands.CreateReservationCommand;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,13 +13,15 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @Embedded
     private Customer customer;
 
-    @OneToMany
+    @ElementCollection
+    @Embedded
     private Set<Ticket> tickets;
 
-    @OneToMany
+    @ElementCollection
+    @Embedded
     private Set<Seat> seats;
 
     private Long showId;
@@ -30,5 +32,7 @@ public class Reservation {
         this.tickets = command.getTickets();
         this.seats = command.getSeats();
     }
+
+
 
 }
