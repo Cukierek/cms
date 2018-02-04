@@ -1,5 +1,7 @@
 package pl.bottega.cms.application;
 
+import pl.bottega.cms.model.Show;
+
 import java.time.LocalTime;
 
 public class ShowDto {
@@ -7,9 +9,9 @@ public class ShowDto {
     private Long id;
     private LocalTime time;
 
-    public ShowDto(Long id, LocalTime time) {
-        this.id = id;
-        this.time = time;
+    public ShowDto(Show show) {
+        this.id = show.getId();
+        this.time = show.getDate().toLocalTime();
     }
 
     public Long getId() {

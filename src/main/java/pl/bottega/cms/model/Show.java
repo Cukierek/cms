@@ -33,6 +33,10 @@ public class Show {
 		this.date = date;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public Cinema getCinema() {
 		return cinema;
 	}

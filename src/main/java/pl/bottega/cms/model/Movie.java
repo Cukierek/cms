@@ -5,6 +5,7 @@ import pl.bottega.cms.model.commands.SetTicketPricesCommand;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,6 +34,9 @@ public class Movie {
 	@Embedded
 	private TicketPrices ticketPrices;
 
+	@OneToMany
+	@JoinColumn(name = "movie_id")
+	private List<Show> shows;
 
 	public Movie() {
 	}
@@ -84,4 +88,7 @@ public class Movie {
 			}
 
 
+	public List<Show> getShows() {
+		return shows;
+	}
 }

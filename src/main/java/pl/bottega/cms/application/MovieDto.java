@@ -1,18 +1,25 @@
 package pl.bottega.cms.application;
 
+import pl.bottega.cms.model.Movie;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MovieDto {
 
+    private Long id;
     private String title;
     private String description;
-    private List<String> actors;
-    private List<String> genres;
+    private Set<String> actors;
+    private Set<String> genres;
     private Integer minAge;
     private Integer lenght;
     private List<ShowDto> shows;
 
-    public MovieDto(String title, String description, List<String> actors, List<String> genres, Integer minAge, Integer lenght, List<ShowDto> shows) {
+    public MovieDto(Long id, String title, String description, Set<String> actors, Set<String> genres, Integer minAge, Integer lenght, List<ShowDto> shows) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.actors = actors;
@@ -20,6 +27,28 @@ public class MovieDto {
         this.minAge = minAge;
         this.lenght = lenght;
         this.shows = shows;
+    }
+
+    public MovieDto(Movie movie) {
+        this.id = movie.getId();
+        this.title = movie.getTitle();
+        this.description = movie.getDescription();
+        this.actors = movie.getActors();
+        this.genres = movie.getGenres();
+        this.minAge = movie.getMinAge();
+        this.lenght = movie.getLength();
+        this.shows = movie.getShows().stream()
+                .map(ShowDto::new)
+                .sorted(Comparator.comparing(ShowDto::getTime))
+                .collect(Collectors.toList());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -38,19 +67,19 @@ public class MovieDto {
         this.description = description;
     }
 
-    public List<String> getActors() {
+    public Set<String> getActors() {
         return actors;
     }
 
-    public void setActors(List<String> actors) {
+    public void setActors(Set<String> actors) {
         this.actors = actors;
     }
 
-    public List<String> getGenres() {
+    public Set<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(Set<String> genres) {
         this.genres = genres;
     }
 
