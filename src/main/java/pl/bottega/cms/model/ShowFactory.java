@@ -26,7 +26,6 @@ public class ShowFactory {
 
 	public ValidationErrors validate(CreateShowsCommand cmd) {
 		ValidationErrors errors = new ValidationErrors();
-
 		cmd.validate(errors);
 		return errors;
 	}
