@@ -3,6 +3,7 @@ package pl.bottega.cms.model.commands;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import pl.bottega.cms.model.ShowsCalendar;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -52,23 +53,47 @@ public class CreateShowsCommand implements Command {
 	}
 
 	public void validate(ValidationErrors errors) {
-		validatePresence(errors, "movieId", movieId);
-		validatePresence(errors, "cinemaId", cinemaId);
+		if (movieId != null) {
+			validateMovieId(errors);
+		}
+
+		if (cinemaId != null) {
+			validateCinemaId(errors);
+		}
 
 		if (dates != null) {
+			validateDates(errors);
 			hasDates = true;
-			validatePresence(errors, "dates", dates);
 		}
 
 		if (hasDates == false) {
 
 			validatePresence(errors, "calendar", calendar);
-//			validateFormat(errors,"calendar", calendar.getFromDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
-//			validateFormat(errors,"calendar", calendar.getFromDate(), "(\\d{4})\\/(\\d{2})\\/(\\d{2})\\s(\\d{2}):(\\d{2})");
-//			validateFormat(errors,"calendar", calendar.getUntilDate(), "([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
 		}
 
 		if (hasDates && calendar != null) validateRequestFormat(errors, false, "dates or calendar");
 		if(errors.any())throw new CommandInvalidException(errors);
+	}
+
+	private void validateCinemaId(ValidationErrors errors) {
+		validatePresence(errors, "cinemaId", cinemaId);
+		if (cinemaId < 1) errors.add("cinemaId","Can't be less than 1");
+	}
+
+	private void validateMovieId(ValidationErrors errors) {
+		validatePresence(errors, "movieId", movieId);
+		if (movieId < 1) errors.add("movieId","Can't be less than 1");
+	}
+
+	private void validateDates(ValidationErrors errors) {
+		validatePresence(errors, "dates", dates);
+		if (dates.isEmpty()) errors.add("dates","Can't be empty");
+		for(LocalDateTime date: dates) {
+			if (date.isBefore(LocalDateTime.now())) errors.add("dates","Date can't be in the past");
+		}
+	}
+
+	private void validateCalendar(ValidationErrors errors) {
+
 	}
 }
