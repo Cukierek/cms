@@ -33,6 +33,7 @@ public class CinemaController {
 
 	@PutMapping("/{cinemaId}/shows")
 	public void createShows(@PathVariable Long cinemaId, @RequestBody CreateShowsCommand cmd) {
+
 		cmd.setCinemaId(cinemaId);
 		gateway.execute(cmd);
 	}
