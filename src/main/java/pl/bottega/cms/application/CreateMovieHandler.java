@@ -33,37 +33,39 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 	public Void validateMovieParameters(CreateMovieCommand cmd) {
 		boolean commandInvalid = false;
 		if (cmd.getTitle().isEmpty()) {
-			validationErrors.add("Title", "Can't be empty");
+			validationErrors.add("title", "Can't be empty");
 			commandInvalid = true;
 		}
 		if (cmd.getDescription().isEmpty()) {
-			validationErrors.add("Description", "Can't be empty");
+			validationErrors.add("description", "Can't be empty");
 			commandInvalid = true;
 		}
 		if (cmd.getActors().isEmpty()) {
-			validationErrors.add("Actors", "Can't be empty");
+			validationErrors.add("actors", "At least one is required");
 			commandInvalid = true;
 		}
 		if (cmd.getGenres().isEmpty()) {
-			validationErrors.add("Genres", "Can't be empty");
+			validationErrors.add("genres", "At least one is required");
 			commandInvalid = true;
 		}
 		if (cmd.getMinAge() == null) {
-			validationErrors.add("Minimal age", "Can't be empty");
+			validationErrors.add("minAge", "Can't be empty");
 			commandInvalid = true;
 		}
 		if (cmd.getMinAge() < 0) {
-			validationErrors.add("Minimal age", "Can't be less than 0");
+			validationErrors.add("minAge", "Can't be less than 0");
 			commandInvalid = true;
 		}
 		if (cmd.getLength() == null) {
-			validationErrors.add("Length", "Can't be empty");
+			validationErrors.add("length", "Can't be empty");
 			commandInvalid = true;
 		}
 		if (cmd.getLength() < 0) {
-			validationErrors.add("Length", "Can't be less than 0");
+			validationErrors.add("length", "Can't be less than 0");
 			commandInvalid = true;
 		}
+
+		System.out.println("VALIDATION ERRORS " + validationErrors.getMessage());
 		if (commandInvalid) throw new CommandInvalidException(validationErrors);
 		return null;
 	}

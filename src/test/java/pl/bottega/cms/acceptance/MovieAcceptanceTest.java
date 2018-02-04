@@ -36,6 +36,7 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
 		String description = "Fajny film";
 		Integer minAge = 17;
+		Integer length = 180;
 		String title = "Pulp Fiction";
 
 		cmc.setActors(actors);
@@ -43,9 +44,10 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		cmc.setGenres(genres);
 		cmc.setMinAge(minAge);
 		cmc.setTitle(title);
+		cmc.setLength(length);
 
 		// WHEN
-		createMovieHandler.handle(cmc);
+		Void nothing = createMovieHandler.handle(cmc);
 
 		// THEN
 		Movie movie = movieRepository.get(1L);
@@ -65,6 +67,7 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		Set<String> genres = new HashSet<>(Arrays.asList("Komedia dramatyczna"));
 		String description = "Fajny film";
 		Integer minAge = 17;
+		Integer length = 180;
 		String title = "";
 
 		cmc.setDescription(description);
@@ -72,6 +75,7 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		cmc.setGenres(genres);
 		cmc.setMinAge(minAge);
 		cmc.setTitle(title);
+		cmc.setLength(length);
 
 		// WHEN
 		createMovieHandler.handle(cmc);
