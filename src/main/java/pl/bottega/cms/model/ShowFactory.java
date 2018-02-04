@@ -2,7 +2,6 @@ package pl.bottega.cms.model;
 
 import org.springframework.stereotype.Component;
 import pl.bottega.cms.Utils.DateUtils;
-import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.model.commands.CreateShowsCommand;
 import pl.bottega.cms.model.commands.ValidationErrors;
 
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.stream.IntStream;
 
@@ -35,10 +33,8 @@ public class ShowFactory {
 	}
 
 	public Collection<Show> createShows(CreateShowsCommand cmd) {
-		if (cmd.hasBothParameterSets())
-			throw new IllegalArgumentException("You should either use calendar or dates, not both.");
 		Collection<Show> shows = new LinkedList<>();
-		if (cmd.isHasDates()) {
+		if (cmd.hasDates()) {
 
 			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());
@@ -49,7 +45,7 @@ public class ShowFactory {
 				shows.add(show);
 			});
 
-		} else if (cmd.isHasShowsCalendar()) {
+		} else {
 
 			Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
 			Movie movie = movieRepository.get(cmd.getMovieId());

@@ -2,7 +2,7 @@ package pl.bottega.cms.application;
 
 import pl.bottega.cms.model.commands.Command;
 
-public interface Handler<C extends Command, R> {
+public interface Handler<C extends Command,R> {
 
 	R handle(C command);
 

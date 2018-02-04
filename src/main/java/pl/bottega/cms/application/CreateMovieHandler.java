@@ -3,7 +3,10 @@ package pl.bottega.cms.application;
 import org.springframework.stereotype.Component;
 import pl.bottega.cms.model.Movie;
 import pl.bottega.cms.model.MovieRepository;
-import pl.bottega.cms.model.commands.*;
+import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CommandInvalidException;
+import pl.bottega.cms.model.commands.CreateMovieCommand;
+import pl.bottega.cms.model.commands.ValidationErrors;
 
 import javax.transaction.Transactional;
 
@@ -53,13 +56,20 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 			validationErrors.add("Minimal age", "Can't be less than 0");
 			commandInvalid = true;
 		}
+		if (cmd.getLength() == null) {
+			validationErrors.add("Length", "Can't be empty");
+			commandInvalid = true;
+		}
+		if (cmd.getLength() < 0) {
+			validationErrors.add("Length", "Can't be less than 0");
+			commandInvalid = true;
+		}
 		if (commandInvalid) throw new CommandInvalidException(validationErrors);
 		return null;
 	}
 
 	@Override
 	public Class<? extends Command> getSupportedCommandClass() {
-
 		return CreateMovieCommand.class;
 	}
 }

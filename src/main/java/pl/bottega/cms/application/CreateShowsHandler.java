@@ -30,7 +30,7 @@ public class CreateShowsHandler implements Handler<CreateShowsCommand, Void> {
 			Collection<Show> shows = showFactory.createShows(command);
 			shows.stream().forEach(show -> showRepository.save(show));
 		}
-		return  null;
+		return null;
 	}
 
 	@Override
