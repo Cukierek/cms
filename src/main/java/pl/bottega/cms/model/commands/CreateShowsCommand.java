@@ -17,6 +17,7 @@ public class CreateShowsCommand implements Command {
 	private ShowsCalendar calendar;
 
 	private boolean hasDates = false;
+	private boolean hasCalendar = false;
 
 	public Long getMovieId() {
 		return movieId;
@@ -60,11 +61,9 @@ public class CreateShowsCommand implements Command {
 		if (cinemaId != null) validateCinemaId(errors);
 		if (movieId != null) validateMovieId(errors);
 		if (dates != null) validateDates(errors);
-		if (hasDates == false && calendar != null) {
-			validateCalendar(errors);
-		} else {
-			errors.add("dates, calendar","Can't use both");
-		}
+		if (calendar != null) validateCalendar(errors);
+		if (hasDates && hasCalendar) errors.add("dates or calendar","Can't use both");
+		if (dates == null && calendar == null) errors.add("dates or calendar", "At least one is required");
 	}
 
 	private void validateCinemaId(ValidationErrors errors) {
@@ -86,6 +85,7 @@ public class CreateShowsCommand implements Command {
 
 	private void validateCalendar(ValidationErrors errors) {
 		validatePresence(errors, "calendar", calendar);
+		hasCalendar = true;
 		if(calendar.getFromDate() != null) {
 			if(calendar.getFromDate().isBefore(LocalDateTime.now()))
 				errors.add("fromDate", "Date can't be in the past");
