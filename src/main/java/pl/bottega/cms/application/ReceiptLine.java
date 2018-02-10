@@ -2,12 +2,19 @@ package pl.bottega.cms.application;
 
 import java.math.BigDecimal;
 
-public class TicketDto {
+public class ReceiptLine {
 
 	private String kind;
 	private Integer count;
 	private BigDecimal unitPrice;
-	private BigDecimal totalPrice;
+	private BigDecimal total;
+
+	public ReceiptLine(String kind, Integer count, BigDecimal unitPrice, BigDecimal total) {
+		this.kind = kind;
+		this.count = count;
+		this.unitPrice = unitPrice;
+		this.total = total;
+	}
 
 	public String getKind() {
 		return kind;
@@ -33,11 +40,11 @@ public class TicketDto {
 		this.unitPrice = unitPrice;
 	}
 
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
+	public BigDecimal getTotal() {
+		return total;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 }

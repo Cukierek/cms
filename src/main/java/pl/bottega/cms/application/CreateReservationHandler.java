@@ -41,7 +41,7 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
         validateNumberOfTickets(command);
         validateTicketsKinds(command);
         checkSeats(command);
-//            validateKindsTicketsAvailabilty(errors, kind, command.getShowId());
+	    // validateKindsTicketsAvailarelobilty(errors, kind, command.getShowId());
 
         if (errors.any())
             throw new CommandInvalidException(errors);

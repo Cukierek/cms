@@ -15,9 +15,6 @@ public class TicketPrices {
     @ElementCollection
     private Map<String, BigDecimal> prices;
 
-
-
-
     public TicketPrices() {
     }
 
@@ -32,9 +29,6 @@ public class TicketPrices {
     public void setPrices(Map<String, BigDecimal> prices) {
         this.prices = prices;
     }
-
-
-
 
     @Override
     public boolean equals(Object o) {

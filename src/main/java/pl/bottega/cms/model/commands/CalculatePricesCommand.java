@@ -4,12 +4,12 @@ import pl.bottega.cms.model.Ticket;
 
 import java.util.Set;
 
-public class CalculatePriceCommand implements Command {
+public class CalculatePricesCommand implements Command {
 
 	Long showId;
 	Set<Ticket> tickets;
 
-	public CalculatePriceCommand() {
+	public CalculatePricesCommand() {
 	}
 
 	public Long getShowId() {

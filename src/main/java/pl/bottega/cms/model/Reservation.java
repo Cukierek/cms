@@ -33,7 +33,23 @@ public class Reservation {
         this.seats = command.getSeats();
     }
 
-    public Set<Seat> getSeats() {
-        return seats;
-    }
+	public Long getId() {
+		return id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public Set<Seat> getSeats() {
+		return seats;
+	}
+
+	public Long getShowId() {
+		return showId;
+	}
 }
