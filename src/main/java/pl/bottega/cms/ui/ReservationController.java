@@ -10,7 +10,6 @@ import pl.bottega.cms.model.commands.CalculatePricesCommand;
 import pl.bottega.cms.model.commands.CreateReservationCommand;
 
 @RestController
-@RequestMapping("/reservations")
 public class ReservationController {
 
     private CommandGateway commandGateway;
