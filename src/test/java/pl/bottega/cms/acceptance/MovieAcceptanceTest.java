@@ -121,17 +121,18 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		return cmc;
 	}
 
-	public TicketPrices createPraises(){
-
-		Map<String, BigDecimal> prices = new HashMap<>();
-		prices.put("general", BigDecimal.valueOf(9.99));
-		prices.put("student", BigDecimal.valueOf(4.99));
-		prices.put("promo", BigDecimal.valueOf(0.99));
-
-		TicketPrices ticketPrices = new TicketPrices(prices);
-		return ticketPrices;
-
-	}
+//	public TicketPrices createPraises(){
+//
+//		Map<String, BigDecimal> prices = new HashMap<>();
+//		prices.put("general", BigDecimal.valueOf(9.99));
+//		prices.put("student", BigDecimal.valueOf(4.99));
+//		prices.put("promo", BigDecimal.valueOf(0.99));
+//
+////		TicketPrices ticketPrices = new TicketPrices(prices);
+////		return ticketPrices;
+//
+//		return null;
+//	}
 
 
 
