@@ -32,6 +32,4 @@ public class MovieController {
 		setTicketPricesCommand.setPrices(prices);
 		commandGateway.execute(setTicketPricesCommand);
 	}
-
-
 }

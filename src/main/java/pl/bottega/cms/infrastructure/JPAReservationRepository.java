@@ -11,26 +11,24 @@ import java.util.List;
 @Component
 public class JPAReservationRepository implements ReservationRepository {
 
-    EntityManager entityManager;
+	EntityManager entityManager;
 
-    public JPAReservationRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+	public JPAReservationRepository(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
-    @Override
-    public void save(Reservation reservation) {
+	@Override
+	public void save(Reservation reservation) {
 
-        entityManager.persist(reservation);
+		entityManager.persist(reservation);
 
-    }
+	}
 
-    @Override
-    public List<Reservation> getReservations(Long showId) {
-        return (List<Reservation>) entityManager
-                .createQuery("FROM Reservation r where r.showId = :showId")
-                .setParameter("showId", showId)
-                .getResultList();
-
-
-    }
+	@Override
+	public List<Reservation> getReservations(Long showId) {
+		return (List<Reservation>) entityManager
+				.createQuery("FROM Reservation r where r.showId = :showId")
+				.setParameter("showId", showId)
+				.getResultList();
+	}
 }
