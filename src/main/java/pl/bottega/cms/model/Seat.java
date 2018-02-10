@@ -8,15 +8,21 @@ import javax.persistence.Table;
 public class Seat {
 
     private Integer row;
-    private Integer seatNumber;
+    private Integer seat;
 
     public Integer getSeatNumber() {
-        return seatNumber;
+        return seat;
     }
 
     public Integer getRow() {
-
         return row;
     }
 
+    public void setRow(Integer row) {
+        this.row = row;
+    }
+
+    public void setSeat(Integer seat) {
+        this.seat = seat;
+    }
 }

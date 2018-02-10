@@ -29,31 +29,16 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand, V
     @Transactional
     public Void handle(SetTicketPricesCommand command) {
 
-        validatePrices(command.getPrices());
+//        validatePrices(command.getPrices());
 
         Movie movie = movieRepository.get(Long.valueOf(command.getMovieId()));
-        TicketPrices ticketPrices = new TicketPrices(command.getPrices());
+        TicketPrices ticketPrices = new TicketPrices(command, validationErrors);
+        ticketPrices.validatePrices();
         movie.setPrices(ticketPrices);
         movieRepository.save(movie);
         return null;
     }
 
-    private Void validatePrices(Map<String, BigDecimal> prices) {
-        boolean commandInvalid = false;
-        if (!(prices.containsKey("regular"))) {
-            validationErrors.add("regular price", "Regular price must be defined");
-            commandInvalid = true;
-        }
-        if (!(prices.containsKey("student"))) {
-            validationErrors.add("student price", "Student price must be defined");
-            commandInvalid = true;
-        }
-
-        if (commandInvalid)
-            throw new CommandInvalidException(validationErrors);
-        return null;
-
-    }
 
     @Override
     public Class<? extends Command> getSupportedCommandClass() {

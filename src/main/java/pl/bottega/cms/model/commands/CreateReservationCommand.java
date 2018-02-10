@@ -38,6 +38,7 @@ public class CreateReservationCommand implements Command {
     }
 
     public void setTickets(Set<Ticket> tickets) {
+
         this.tickets = tickets;
     }
 
