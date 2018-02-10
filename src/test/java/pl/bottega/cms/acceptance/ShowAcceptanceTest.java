@@ -88,11 +88,11 @@ public class ShowAcceptanceTest extends AcceptanceTest {
 				csc.setMovieId(1L);
 				csc.setDates(new HashSet<LocalDateTime>(
 						Arrays.asList(
-								LocalDateTime.parse("2017/01/01 10:30"),
-								LocalDateTime.parse("2017/01/01 14:00"),
-								LocalDateTime.parse("2017/01/01 18:30"),
-								LocalDateTime.parse("2017/01/01 20:30"),
-								LocalDateTime.parse("2017/01/01 22:15")
+								LocalDateTime.parse("2019-01-01T10:30"),
+								LocalDateTime.parse("2019-01-01T14:00"),
+								LocalDateTime.parse("2019-01-01T18:30"),
+								LocalDateTime.parse("2019-01-01T20:30"),
+								LocalDateTime.parse("2019-01-01T22:15")
 						)
 				));
 				return csc;
@@ -101,8 +101,8 @@ public class ShowAcceptanceTest extends AcceptanceTest {
 				csc.setCinemaId(1L);
 				csc.setMovieId(1L);
 				ShowsCalendar showsCalendar = new ShowsCalendar();
-				showsCalendar.setFromDate(LocalDateTime.parse("2018/01/01 10:30"));
-				showsCalendar.setUntilDate(LocalDateTime.parse("2018/01/15 22:30"));
+				showsCalendar.setFromDate(LocalDateTime.parse("2019-01-01T10:30"));
+				showsCalendar.setUntilDate(LocalDateTime.parse("2019-01-15T22:30"));
 				showsCalendar.setHours(new HashSet<>(Arrays.asList(LocalTime.parse("12:30"))));
 				showsCalendar.setWeekDays(new HashSet<>(Arrays.asList("Wednesday", "Thursday")));
 				csc.setCalendar(showsCalendar);

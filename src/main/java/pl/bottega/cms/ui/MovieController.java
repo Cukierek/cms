@@ -17,7 +17,6 @@ public class MovieController {
 	private CommandGateway commandGateway;
 
 	public MovieController(CommandGateway commandGateway) {
-
 		this.commandGateway = commandGateway;
 	}
 
@@ -25,7 +24,6 @@ public class MovieController {
 	public void create(@RequestBody CreateMovieCommand cmd) {
 		commandGateway.execute(cmd);
 	}
-
 
 	@PutMapping("/{movieId}/prices")
 	void setTicketPrices(@PathVariable Integer movieId, @RequestBody Map<String, BigDecimal> prices){

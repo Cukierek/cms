@@ -24,15 +24,9 @@ public class SetTicketPricesCommand implements Command {
         this.prices = prices;
     }
 
-
     @Override
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "movieId", movieId);
         validatePresence(errors, "prices", prices);
-
     }
-
-
-
-
 }

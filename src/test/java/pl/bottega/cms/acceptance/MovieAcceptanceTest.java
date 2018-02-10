@@ -72,11 +72,11 @@ public class MovieAcceptanceTest extends AcceptanceTest {
 		Integer length = 180;
 		String title = "";
 
+		cmc.setTitle(title);
 		cmc.setDescription(description);
 		cmc.setActors(actors);
 		cmc.setGenres(genres);
 		cmc.setMinAge(minAge);
-		cmc.setTitle(title);
 		cmc.setLength(length);
 
 		// WHEN
