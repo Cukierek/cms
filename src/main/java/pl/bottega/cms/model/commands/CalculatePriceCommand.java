@@ -29,7 +29,31 @@ public class CalculatePriceCommand implements Command {
 	}
 
 	public void validate(ValidationErrors errors) {
+		validateShowId(errors);
+		validateTickets(errors);
+	}
+
+	private void validateShowId(ValidationErrors errors) {
 		validatePresence(errors, "showId", showId);
+	}
+
+	private void validateTickets(ValidationErrors errors) {
 		validatePresence(errors, "tickets", tickets);
+		tickets.stream().forEach(ticket -> {
+			if (ticket == null) {
+				errors.add("ticket", "Can't be empty");
+			} else {
+				if (ticket.getKind() == null) {
+					errors.add("kind", "Can't be empty");
+				} else {
+					if (ticket.getKind().isEmpty()) errors.add("kind", "Can't be empty");
+				}
+				if (ticket.getCount() == null) {
+					errors.add("count", "Can't be empty");
+				} else {
+					if(ticket.getCount() < 1) errors.add("count", "Can't be less than 1");
+				}
+			}
+		});
 	}
 }

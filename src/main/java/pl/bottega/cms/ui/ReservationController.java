@@ -24,7 +24,7 @@ public class ReservationController {
         commandGateway.execute(cmd);
     }
 
-    @PostMapping("/price_caluclator")
+    @PostMapping("/price_calculator")
     public void calculatePrice(@RequestBody CalculatePriceCommand cmd) {
     	commandGateway.execute(cmd);
     }

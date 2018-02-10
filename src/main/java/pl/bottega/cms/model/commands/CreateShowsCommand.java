@@ -103,7 +103,7 @@ public class CreateShowsCommand implements Command {
 		}
 
 		if (calendar.getUntilDate() == null) {
-			errors.add("fromDate", "Can't be empty");
+			errors.add("untilDate", "Can't be empty");
 		} else {
 			if (calendar.getUntilDate().isBefore(LocalDateTime.now()))
 				errors.add("untilDate", "Date can't be in the past");

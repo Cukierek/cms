@@ -1,5 +1,6 @@
 package pl.bottega.cms.application;
 
+import pl.bottega.cms.model.Reservation;
 import pl.bottega.cms.model.ReservationRepository;
 import pl.bottega.cms.model.Show;
 import pl.bottega.cms.model.commands.CalculatePriceCommand;
@@ -13,19 +14,13 @@ import java.util.List;
 
 public class CalculatePriceHandler implements Handler <CalculatePriceCommand, PriceDto> {
 
-	ReservationRepository reservationRepository;
+	private ReservationRepository reservationRepository;
 	private ValidationErrors validationErrors;
 
 	@Override
 	@Transactional
 	public PriceDto handle(CalculatePriceCommand cmd) {
-//		Show show = reservationRepository.get(cmd.getShowId());
-
-		List<Show> shows = new ArrayList<>();
-
-//		Movie movie = new Movie(cmd);
-//		movieRepository.save(movie);
-
+		List<Reservation> reservations = reservationRepository.getReservations(cmd.getShowId());
 		return null;
 	}
 

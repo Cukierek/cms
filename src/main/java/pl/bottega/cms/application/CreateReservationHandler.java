@@ -20,7 +20,6 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     private ReservationRepository reservationRepository;
     private ValidationErrors errors;
 
-
     public CreateReservationHandler(ShowRepository showRepository, ReservationRepository reservationRepository, ValidationErrors errors) {
         this.showRepository = showRepository;
         this.reservationRepository = reservationRepository;

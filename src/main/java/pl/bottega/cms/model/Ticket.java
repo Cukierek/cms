@@ -7,22 +7,21 @@ import javax.persistence.*;
 public class Ticket {
 
     String kind;
-    int count;
+    Integer count;
 
+	public String getKind() {
+		return kind;
+	}
 
-    public String getKind() {
-        return kind;
-    }
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
+	public Integer getCount() {
+		return count;
+	}
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 }
