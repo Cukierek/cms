@@ -3,11 +3,14 @@ package pl.bottega.cms.application;
 import org.springframework.stereotype.Component;
 import pl.bottega.cms.model.*;
 import pl.bottega.cms.model.commands.Command;
+import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.model.commands.CreateReservationCommand;
 import pl.bottega.cms.model.commands.ValidationErrors;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -28,7 +31,7 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     @Transactional
     public Long handle(CreateReservationCommand command) {
         validateTickets(command);
-        Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
+        List<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);
 
 
@@ -38,21 +41,72 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     private void validateTickets(CreateReservationCommand command) {
         validateNumberOfTickets(command);
         validateTicketsKinds(command);
+        checkSeats(command);
 //            validateKindsTicketsAvailabilty(errors, kind, command.getShowId());
+
+        if (errors.any())
+            throw new CommandInvalidException(errors);
+
+    }
+
+    private void checkSeats(CreateReservationCommand command) {
+        checkIfOneRow(command);
+        checkIfNextTo(command);
+
+
+    }
+
+    private void checkIfNextTo(CreateReservationCommand command) {
+        List<Seat> seats = new ArrayList<>(command.getSeats());
+        seats.sort((o1, o2) -> {
+            if (o1.getSeatNumber() == o2.getSeatNumber()) return 0;
+            if (o1.getSeatNumber() > o2.getSeatNumber()) return 1;
+            return -1;
+        });
+
+        for (int i = 1; i < seats.size(); i++) {
+            if (seats.get(i - 1).getSeatNumber() < seats.get(i).getSeatNumber())
+                errors.add("seat number", "Seats aren't next to others");
+        }
+        ;
+
+    }
+
+    private void checkIfOneRow(CreateReservationCommand command) {
+
+        int rowNumber = command.getSeats().stream().findFirst().get().getRow();
+
+        for (Seat seat : command.getSeats()) {
+            if (seat.getRow() != rowNumber) {
+                errors.add("row", "Not the same row");
+            }
+
+        }
+
 
     }
 
     private void validateNumberOfTickets(CreateReservationCommand command) {
 
-        if (!(countNumberOfTickets(command) > 0))
-            errors.add("ticket", "Shoud be at least one");
+        int numberOfTickets = countNumberOfTickets(command);
+        if (!(numberOfTickets > 0) || numberOfTickets != countNumberOfSeats(command)) {
+            errors.add("number of tickets", "Number must be equal to number of Seats and be more than 0");
+
+        }
+
+
+    }
+
+
+    private int countNumberOfSeats(CreateReservationCommand command) {
+        return command.getSeats().size();
 
     }
 
     private int countNumberOfTickets(CreateReservationCommand command) {
         int count = 0;
         for (Ticket ticket : command.getTickets())
-            count = +ticket.getCount();
+            count += ticket.getCount();
         return count;
     }
 

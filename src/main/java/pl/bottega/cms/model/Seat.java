@@ -1,6 +1,7 @@
 package pl.bottega.cms.model;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
 
 @Embeddable
 @Table(name = "seats")
@@ -17,4 +18,5 @@ public class Seat {
 
         return row;
     }
+
 }

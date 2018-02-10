@@ -1,11 +1,11 @@
 package pl.bottega.cms.model;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ReservationRepository {
 
     void save(Reservation reservation);
 
-    Set<Reservation> getReservations(Long showId);
+    List<Reservation> getReservations(Long showId);
 
 }

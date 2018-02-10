@@ -3,6 +3,7 @@ package pl.bottega.cms.model;
 
 import pl.bottega.cms.model.commands.CreateReservationCommand;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -13,7 +14,7 @@ public class CinemaHall {
 
     boolean[][] seats = new boolean[ROWS][SEATS];
 
-    public CinemaHall(Set<Reservation> currentReservations) {
+    public CinemaHall(List<Reservation> currentReservations) {
         currentReservations.forEach(this::getSeatsFromReservation);
     }
 
