@@ -22,6 +22,11 @@ public class JPAShowRepository implements ShowRepository {
 
 	@Override
 	public Show get(Long id) {
-		return entityManager.find(Show.class, id);
+		Show show = entityManager.find(Show.class, id);
+		if (show == null)
+			throw new NoSuchEntityException();
+		return show;
 	}
+
 }
+

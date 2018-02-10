@@ -2,8 +2,10 @@ package pl.bottega.cms.model.commands;
 
 import pl.bottega.cms.model.Customer;
 import pl.bottega.cms.model.Seat;
+import pl.bottega.cms.model.ShowRepository;
 import pl.bottega.cms.model.Ticket;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class CreateReservationCommand implements Command {
@@ -12,6 +14,8 @@ public class CreateReservationCommand implements Command {
     Customer customer;
     Set<Ticket> tickets;
     Set<Seat> seats;
+
+
 
     public Long getShowId() {
         return showId;
@@ -44,4 +48,24 @@ public class CreateReservationCommand implements Command {
     public void setSeats(Set<Seat> seats) {
         this.seats = seats;
     }
+
+    public void validate(ValidationErrors errors) {
+        validatePresence(errors, "showId", showId);
+        validatePresence(errors, "tickets", tickets);
+        validatePresence(errors, "seats", seats);
+        validatePresence(errors, "phone", customer.getPhone());
+        validatePresence(errors, "firsName", customer.getFirstName());
+        validatePresence(errors, "lastName", customer.getLastName());
+        validateFormat(errors, "email", customer.getEmail(), "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$");
+    }
+
+
+
+
+
+
+
+
+
 }
+

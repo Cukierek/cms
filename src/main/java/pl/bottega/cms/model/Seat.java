@@ -1,16 +1,22 @@
 package pl.bottega.cms.model;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
 
-@Entity
+@Embeddable
 @Table(name = "seats")
 public class Seat {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private Integer row;
     private Integer seatNumber;
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public Integer getRow() {
+
+        return row;
+    }
 
 }
