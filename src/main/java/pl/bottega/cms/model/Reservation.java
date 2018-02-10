@@ -3,6 +3,7 @@ package pl.bottega.cms.model;
 
 import pl.bottega.cms.model.commands.CreateReservationCommand;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -26,12 +27,21 @@ public class Reservation {
 
     private Long showId;
 
+    ReservationStatus status;
+
+    @Column(name = "total_cost")
+    BigDecimal totalCost;
+
+
     public Reservation(CreateReservationCommand command) {
         this.showId = command.getShowId();
         this.customer = command.getCustomer();
         this.tickets = command.getTickets();
         this.seats = command.getSeats();
     }
+
+
+    public Reservation(){}
 
 	public Long getId() {
 		return id;

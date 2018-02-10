@@ -13,8 +13,8 @@ import java.util.Set;
 
 public class CinemaHall {
 
-    private final Integer ROWS = 15;
-    private final Integer SEATS = 10;
+    private final Integer ROWS = 10;
+    private final Integer SEATS = 15;
 
     private CreateReservationCommand createReservationCommand;
     private ShowRepository showRepository;
@@ -45,6 +45,7 @@ public class CinemaHall {
         validateTicketKindsAvailability();
         validateTicketsKindsUniqueness();
         validateNumberOfTickets();
+
 
         checkSeats();
 
@@ -125,7 +126,7 @@ public class CinemaHall {
         Arrays.sort(seatNumbers);
 
         for (i = 1; i < seatNumbers.length; i++) {
-            if (seatNumbers[i - 1] > seatNumbers[i])
+            if (seatNumbers[i - 1]+1 != seatNumbers[i])
                 errors.add("seat numbers", "Seats aren't next to others");
         }
 
