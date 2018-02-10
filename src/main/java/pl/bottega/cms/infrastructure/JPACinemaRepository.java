@@ -3,6 +3,7 @@ package pl.bottega.cms.infrastructure;
 import org.springframework.stereotype.Component;
 import pl.bottega.cms.model.Cinema;
 import pl.bottega.cms.model.CinemaRepository;
+import pl.bottega.cms.model.GenericJpaRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,27 +11,7 @@ import javax.persistence.Query;
 import java.util.Optional;
 
 @Component
-public class JPACinemaRepository implements CinemaRepository {
-
-	private EntityManager entityManager;
-
-	public JPACinemaRepository(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-
-	@Override
-	public void save(Cinema cinema) {
-		entityManager.persist(cinema);
-	}
-
-	@Override
-	public Cinema get(Long id) {
-		Cinema cinema = entityManager.find(Cinema.class, id);
-		if (cinema == null)
-			throw new NoSuchEntityException();
-		return cinema;
-	}
-
+public class JPACinemaRepository extends GenericJpaRepository<Cinema> implements CinemaRepository {
 	@Override
 	public Optional<Cinema> findByNameAndCity(String name, String city) {
 		try {

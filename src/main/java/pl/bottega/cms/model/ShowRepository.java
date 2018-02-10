@@ -1,6 +1,4 @@
 package pl.bottega.cms.model;
 
-public interface ShowRepository {
-	void save(Show show);
-	Show get(Long id);
+public interface ShowRepository extends Repository<Show> {
 }

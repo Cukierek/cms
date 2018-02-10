@@ -39,21 +39,25 @@ public class CalculatePricesCommand implements Command {
 
 	private void validateTickets(ValidationErrors errors) {
 		validatePresence(errors, "tickets", tickets);
-		tickets.stream().forEach(ticket -> {
-			if (ticket == null) {
-				errors.add("ticket", "Can't be empty");
-			} else {
-				if (ticket.getKind() == null) {
-					errors.add("kind", "Can't be empty");
+		if (tickets != null) {
+			tickets.stream().forEach(ticket -> {
+				if (ticket == null) {
+					errors.add("ticket", "Can't be empty");
 				} else {
-					if (ticket.getKind().isEmpty()) errors.add("kind", "Can't be empty");
+					if (ticket.getKind() == null) {
+						errors.add("kind", "Can't be empty");
+					} else {
+						if (ticket.getKind().isEmpty()) errors.add("kind", "Can't be empty");
+					}
+					if (ticket.getCount() == null) {
+						errors.add("count", "Can't be empty");
+					} else {
+						if (ticket.getCount() < 1) errors.add("count", "Can't be less than 1");
+					}
 				}
-				if (ticket.getCount() == null) {
-					errors.add("count", "Can't be empty");
-				} else {
-					if(ticket.getCount() < 1) errors.add("count", "Can't be less than 1");
-				}
-			}
-		});
+			});
+		} else {
+			errors.add("tickets", "Can't be empty");
+		}
 	}
 }
