@@ -1,6 +1,7 @@
 package pl.bottega.cms.infrastructure;
 
 import org.springframework.stereotype.Component;
+import pl.bottega.cms.model.GenericJpaRepository;
 import pl.bottega.cms.model.Reservation;
 import pl.bottega.cms.model.ReservationRepository;
 
@@ -9,21 +10,7 @@ import java.util.List;
 
 
 @Component
-public class JPAReservationRepository implements ReservationRepository {
-
-	EntityManager entityManager;
-
-	public JPAReservationRepository(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-
-	@Override
-	public void save(Reservation reservation) {
-
-		entityManager.persist(reservation);
-
-	}
-
+public class JPAReservationRepository extends GenericJpaRepository<Reservation> implements ReservationRepository {
 	@Override
 	public List<Reservation> getReservations(Long showId) {
 		return (List<Reservation>) entityManager
