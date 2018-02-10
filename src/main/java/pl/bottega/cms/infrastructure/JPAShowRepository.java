@@ -19,4 +19,9 @@ public class JPAShowRepository implements ShowRepository {
 	public void save(Show show) {
 		entityManager.persist(show);
 	}
+
+	@Override
+	public Show get(Long id) {
+		return entityManager.find(Show.class, id);
+	}
 }

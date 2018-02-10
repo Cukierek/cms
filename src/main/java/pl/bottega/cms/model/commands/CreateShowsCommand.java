@@ -56,61 +56,80 @@ public class CreateShowsCommand implements Command {
 	}
 
 	public void validate(ValidationErrors errors) {
-		validatePresence(errors, "cinemaId", cinemaId);
-		validatePresence(errors, "movieId", movieId);
-		if (cinemaId != null) validateCinemaId(errors);
-		if (movieId != null) validateMovieId(errors);
-		if (dates != null) validateDates(errors);
-		if (calendar != null) validateCalendar(errors);
-		if (hasDates && hasCalendar) errors.add("dates or calendar","Can't use both");
-		if (dates == null && calendar == null) errors.add("dates or calendar", "At least one is required");
+		validateCinemaId(errors);
+		validateMovieId(errors);
+
+		if (dates != null) hasDates = true;
+		if (calendar != null) hasCalendar = true;
+
+		if (hasDates && hasCalendar) {
+			errors.add("dates or calendar", "Can't use both");
+		} else if (hasDates && !hasCalendar) {
+			validateDates(errors);
+		} else if (!hasDates && hasCalendar) {
+			validateCalendar(errors);
+		} else if (!hasDates && !hasCalendar) {
+			errors.add("dates or calendar", "At least one is required");
+		}
 	}
 
 	private void validateCinemaId(ValidationErrors errors) {
-		if (cinemaId < 1) errors.add("cinemaId","Can't be less than 1");
+		validatePresence(errors, "cinemaId", cinemaId);
+		if (cinemaId < 1) errors.add("cinemaId", "Can't be less than 1");
 	}
 
 	private void validateMovieId(ValidationErrors errors) {
-		if (movieId < 1) errors.add("movieId","Can't be less than 1");
+		validatePresence(errors, "movieId", movieId);
+		if (movieId < 1) errors.add("movieId", "Can't be less than 1");
 	}
 
 	private void validateDates(ValidationErrors errors) {
 		validatePresence(errors, "dates", dates);
-		hasDates = true;
-		if (dates.isEmpty()) errors.add("dates","Can't be empty");
-		for(LocalDateTime date: dates) {
-			if (date.isBefore(LocalDateTime.now())) errors.add("dates","Date can't be in the past");
+		if (dates.isEmpty()) errors.add("dates", "Can't be empty");
+		for (LocalDateTime date : dates) {
+			if (date.isBefore(LocalDateTime.now())) errors.add("dates", "Date can't be in the past");
 		}
 	}
 
 	private void validateCalendar(ValidationErrors errors) {
 		validatePresence(errors, "calendar", calendar);
-		hasCalendar = true;
-		if(calendar.getFromDate() != null) {
-			if(calendar.getFromDate().isBefore(LocalDateTime.now()))
+
+		if (calendar.getFromDate() == null) {
+			errors.add("fromDate", "Can't be empty");
+		} else {
+			if (calendar.getFromDate().isBefore(LocalDateTime.now()))
 				errors.add("fromDate", "Date can't be in the past");
 		}
-		if(calendar.getUntilDate() != null) {
-			if(calendar.getUntilDate().isBefore(LocalDateTime.now()))
+
+		if (calendar.getUntilDate() == null) {
+			errors.add("fromDate", "Can't be empty");
+		} else {
+			if (calendar.getUntilDate().isBefore(LocalDateTime.now()))
 				errors.add("untilDate", "Date can't be in the past");
 		}
-		if(calendar.getFromDate() != null && calendar.getUntilDate() != null) {
-			if(calendar.getFromDate().isAfter(calendar.getUntilDate()))
+
+		if (calendar.getFromDate() != null && calendar.getUntilDate() != null) {
+			if (calendar.getFromDate().isAfter(calendar.getUntilDate()))
 				errors.add("fromDate", "Can't be before untilDate");
 		}
-		if(calendar.getWeekDays() != null) {
-			if(calendar.getWeekDays().isEmpty())errors.add("weekDays","Can't be empty");
+
+		if (calendar.getWeekDays() == null) {
+			errors.add("weekDays", "Can't be empty");
+		} else {
+			if (calendar.getWeekDays().isEmpty()) errors.add("weekDays", "Can't be empty");
 			Set<String> weekDayStrings = new HashSet<>();
-			for(DayOfWeek dayOfWeek : DayOfWeek.values()) weekDayStrings.add(dayOfWeek.toString());
+			for (DayOfWeek dayOfWeek : DayOfWeek.values()) weekDayStrings.add(dayOfWeek.toString());
 			for (String weekDay : calendar.getWeekDays()) {
-				if(weekDay == null) errors.add("weekDay","Can't be empty");
-				if(!weekDayStrings.contains(weekDay.toUpperCase())) errors.add("weekDays", "No such day of week");
+				if (weekDay == null) errors.add("weekDay", "Can't be empty");
+				if (!weekDayStrings.contains(weekDay.toUpperCase())) errors.add("weekDays", "No such day of week");
 			}
 		}
-		if(calendar.getHours() != null) {
-			if(calendar.getHours().isEmpty())errors.add("hours", "Can't be empty");
-			for(LocalTime time : calendar.getHours()) if(time == null)errors.add("hour","Can't be empty");
-		}
 
+		if (calendar.getHours() == null) {
+			errors.add("hours", "Can't be empty");
+		} else {
+			if (calendar.getHours().isEmpty()) errors.add("hours", "Can't be empty");
+			for (LocalTime time : calendar.getHours()) if (time == null) errors.add("hour", "Can't be empty");
+		}
 	}
 }
