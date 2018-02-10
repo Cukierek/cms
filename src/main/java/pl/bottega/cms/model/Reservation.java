@@ -33,6 +33,7 @@ public class Reservation {
         this.seats = command.getSeats();
     }
 
-
-
+    public Set<Seat> getSeats() {
+        return seats;
+    }
 }

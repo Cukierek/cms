@@ -19,7 +19,6 @@ public class ReservationController {
 
     @PutMapping
     public void create(@RequestBody CreateReservationCommand cmd) {
-
         commandGateway.execute(cmd);
     }
 

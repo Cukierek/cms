@@ -9,5 +9,12 @@ public class Seat {
     private Integer row;
     private Integer seatNumber;
 
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
 
+    public Integer getRow() {
+
+        return row;
+    }
 }

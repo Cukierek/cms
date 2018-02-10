@@ -10,6 +10,7 @@ import java.util.Set;
 public class CreateShowsCommand implements Command {
 
 	private Long movieId, cinemaId;
+
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")
 	private Set<LocalDateTime> dates;
 	private ShowsCalendar calendar;
