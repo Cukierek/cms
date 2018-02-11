@@ -27,7 +27,7 @@ public class Reservation {
 
     private Long showId;
 
-    ReservationStatus status;
+//   ReservationStatus status;
 
     @Column(name = "total_cost")
     BigDecimal totalCost;

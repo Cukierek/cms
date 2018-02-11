@@ -34,11 +34,10 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
         List<Reservation> currentReservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(currentReservations, command, errors, showRepository);
         cinemaHall.validateTickets();
-        cinemaHall.checkReservations();
 
         reservationRepository.save(reservation);
 
-        return null;
+        return reservation.getId();
     }
 
     @Override
