@@ -6,4 +6,5 @@ public interface CinemaFinder {
 
 	List<CinemaDto> getAll();
 	CinemaDto findByCityAndName(String city, String name);
+	CinemaHallDto getSeats(Long showId);
 }

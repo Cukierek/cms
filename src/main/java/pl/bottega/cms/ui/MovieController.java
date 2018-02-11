@@ -26,7 +26,7 @@ public class MovieController {
 	}
 
 	@PutMapping("/{movieId}/prices")
-	void setTicketPrices(@PathVariable Integer movieId, @RequestBody Map<String, BigDecimal> prices){
+	public void setTicketPrices(@PathVariable Integer movieId, @RequestBody Map<String, BigDecimal> prices){
 		SetTicketPricesCommand setTicketPricesCommand = new SetTicketPricesCommand();
 		setTicketPricesCommand.setMovieId(movieId);
 		setTicketPricesCommand.setPrices(prices);
