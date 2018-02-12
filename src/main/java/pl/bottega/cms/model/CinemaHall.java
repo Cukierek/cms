@@ -1,6 +1,7 @@
 package pl.bottega.cms.model;
 
 
+import pl.bottega.cms.application.CinemaHallDto;
 import pl.bottega.cms.model.commands.CommandInvalidException;
 import pl.bottega.cms.model.commands.CreateReservationCommand;
 import pl.bottega.cms.model.commands.ValidationErrors;
@@ -28,6 +29,10 @@ public class CinemaHall {
         this.errors = errors;
         this.showRepository = showRepository;
         currentReservations.forEach(this::getSeatsFromReservation);
+    }
+
+    public CinemaHall(List<Reservation> reservations){
+        reservations.forEach(this::getSeatsFromReservation);
     }
 
 
@@ -158,5 +163,24 @@ public class CinemaHall {
 
         return true;
 
+    }
+
+    public CinemaHallDto getSeatsOccupation() {
+        Set<Seat> free = new HashSet<>();
+        Set<Seat> occupied = new HashSet<>();
+        setSeatOccupation(free, occupied);
+        return new CinemaHallDto(free, occupied);
+    }
+
+    private void setSeatOccupation(Set<Seat> free, Set<Seat> occupied) {
+        for (int i = 0; i < ROWS; i++) {
+            boolean[] row = seats[i];
+            for (int j = 0; j < SEATS; j++) {
+                if (row[j])
+                    occupied.add(new Seat(i + 1, j + 1));
+                else
+                    free.add(new Seat(i + 1, j + 1));
+            }
+        }
     }
 }
