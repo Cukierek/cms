@@ -1,6 +1,13 @@
 package pl.bottega.cms.model;
 
-public class ReservationStatus {
+import javax.persistence.Embeddable;
 
+@Embeddable
+public enum ReservationStatus {
+
+    PENDING,
+    PAID,
+    CANCELED,
+    PAYMENT_FAILED
 
 }

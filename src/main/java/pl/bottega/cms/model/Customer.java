@@ -1,13 +1,16 @@
 package pl.bottega.cms.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 @Embeddable
-@Table(name = "customers")
+//@Table(name = "customers")
 public class Customer {
 
 
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String email;
     private String phone;

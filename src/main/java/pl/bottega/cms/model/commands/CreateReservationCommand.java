@@ -57,7 +57,11 @@ public class CreateReservationCommand implements Command {
         validatePresence(errors, "phone", customer.getPhone());
         validatePresence(errors, "firsName", customer.getFirstName());
         validatePresence(errors, "lastName", customer.getLastName());
+        validatePresence(errors, "email", customer.getEmail());
         validateFormat(errors, "email", customer.getEmail(), "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$");
+
+
+
     }
 
 

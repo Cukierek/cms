@@ -18,16 +18,15 @@ public class Reservation {
     private Customer customer;
 
     @ElementCollection
-    @Embedded
     private Set<Ticket> tickets;
 
     @ElementCollection
-    @Embedded
     private Set<Seat> seats;
 
+    @Column(name = "show_id")
     private Long showId;
 
-//   ReservationStatus status;
+   ReservationStatus status;
 
     @Column(name = "total_cost")
     BigDecimal totalCost;

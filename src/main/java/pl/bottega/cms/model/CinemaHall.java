@@ -45,8 +45,11 @@ public class CinemaHall {
         validateTicketKindsAvailability();
         validateTicketsKindsUniqueness();
         validateNumberOfTickets();
-        checkIfOneRow();
-        checkIfNextTo();
+
+        if (countNumberOfSeats() > 1) {
+            checkIfOneRow();
+            checkIfNextTo();
+        }
         checkSeatsAreAvailable();
 
 
@@ -107,21 +110,18 @@ public class CinemaHall {
     }
 
     private void checkIfNextTo() {
-
         Integer[] seatNumbers = new Integer[createReservationCommand.getSeats().size()];
         int i = 0;
         for (Seat seat : createReservationCommand.getSeats()) {
             seatNumbers[i] = seat.getSeatNumber();
             i++;
         }
-        Arrays.sort(seatNumbers);
 
+        Arrays.sort(seatNumbers);
         for (i = 1; i < seatNumbers.length; i++) {
             if (seatNumbers[i - 1] + 1 != seatNumbers[i])
                 errors.add("seat numbers", "Seats aren't next to others");
         }
-
-
     }
 
     private void validateTicketKindsAvailability() {
@@ -133,7 +133,7 @@ public class CinemaHall {
                 if (!(tp.getPrices().containsKey(t.kind)))
                     errors.add("tickets kind", String.format("%s tickets are not available", t.kind));
 
-            }else{
+            } else {
                 errors.add("ticket kind", "Can't be empty");
             }
         }
@@ -143,7 +143,7 @@ public class CinemaHall {
     private void checkSeatsAreAvailable() {
         for (Seat seat : createReservationCommand.getSeats()) {
             if (!checkSeatAvailability(seat))
-                errors.add("seat", String.format("Place row: %d seat: %d is not available", seat.getRow(), seat.getSeatNumber()));
+                errors.add(String.format("row: %d seat: %d",seat.getRow(), seat.getSeatNumber()), "Place is not available");
         }
 
 
