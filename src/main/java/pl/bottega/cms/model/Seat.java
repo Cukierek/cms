@@ -30,7 +30,7 @@ public class Seat {
         this.row = row;
     }
 
-    public void setSeat(Integer seat) {
+    public void setSeatNumber(Integer seat) {
         this.seat = seat;
     }
 }
