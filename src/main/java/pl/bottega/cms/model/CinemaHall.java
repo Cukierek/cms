@@ -151,7 +151,6 @@ public class CinemaHall {
                 errors.add(String.format("row: %d seat: %d",seat.getRow(), seat.getSeatNumber()), "Place is not available");
         }
 
-
     }
 
 
