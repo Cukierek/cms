@@ -42,24 +42,34 @@ public class CinemaHall {
 
 
     void reserveSeat(Seat seat) {
-        seats[seat.getRow() - 1][seat.getSeatNumber() - 1] = true;
+        seats[seat.getRow() - 1][seat.getSeat() - 1] = true;
 
     }
 
     public void validateTickets() {
-        validateTicketKindsAvailability();
-        validateTicketsKindsUniqueness();
-        validateNumberOfTickets();
+        if (showRepository.checkIfExists(createReservationCommand.getShowId())) {
+            validateTicketKindsAvailability();
+            validateTicketsKindsUniqueness();
+            validateNumberOfTickets();
 
-        if (countNumberOfSeats() > 1) {
-            checkIfOneRow();
-            checkIfNextTo();
+            if (countNumberOfSeats() > 1) {
+                checkIfOneRow();
+                checkIfNextTo();
+            }
+            checkSeatsAreAvailable();
         }
-        checkSeatsAreAvailable();
-
+        else {
+            errors.add("showId", "No such record");
+        }
 
         if (errors.any())
             throw new CommandInvalidException(errors);
+
+    }
+
+    private void validateShowId() {
+
+
 
     }
 
@@ -118,7 +128,7 @@ public class CinemaHall {
         Integer[] seatNumbers = new Integer[createReservationCommand.getSeats().size()];
         int i = 0;
         for (Seat seat : createReservationCommand.getSeats()) {
-            seatNumbers[i] = seat.getSeatNumber();
+            seatNumbers[i] = seat.getSeat();
             i++;
         }
 
@@ -148,16 +158,16 @@ public class CinemaHall {
     private void checkSeatsAreAvailable() {
         for (Seat seat : createReservationCommand.getSeats()) {
             if (!checkSeatAvailability(seat))
-                errors.add(String.format("row: %d seat: %d",seat.getRow(), seat.getSeatNumber()), "Place is not available");
+                errors.add(String.format("row: %d seat: %d",seat.getRow(), seat.getSeat()), "Place is not available");
         }
 
     }
 
 
     public boolean checkSeatAvailability(Seat seat) {
-        if (seat.getRow() > ROWS || seat.getSeatNumber() > SEATS)
+        if (seat.getRow() > ROWS || seat.getSeat() > SEATS)
             return false;
-        if (seats[seat.getRow() - 1][seat.getSeatNumber() - 1])
+        if (seats[seat.getRow() - 1][seat.getSeat() - 1])
             return false;
 
         return true;

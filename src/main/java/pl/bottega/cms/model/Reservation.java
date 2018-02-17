@@ -2,6 +2,7 @@ package pl.bottega.cms.model;
 
 
 import pl.bottega.cms.model.commands.CreateReservationCommand;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -26,10 +27,11 @@ public class Reservation {
     @Column(name = "show_id")
     private Long showId;
 
-   ReservationStatus status;
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     @Column(name = "total_cost")
-    BigDecimal totalCost;
+    private BigDecimal totalCost;
 
 
     public Reservation(CreateReservationCommand command) {
@@ -37,28 +39,47 @@ public class Reservation {
         this.customer = command.getCustomer();
         this.tickets = command.getTickets();
         this.seats = command.getSeats();
+        this.status = ReservationStatus.PENDING;
     }
 
 
-    public Reservation(){}
+    public Reservation() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Customer getCustomer() {
-		return customer;
-	}
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public Set<Ticket> getTickets() {
-		return tickets;
-	}
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
 
-	public Set<Seat> getSeats() {
-		return seats;
-	}
+    public Set<Seat> getSeats() {
+        return seats;
+    }
 
-	public Long getShowId() {
-		return showId;
-	}
+    public Long getShowId() {
+        return showId;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
 }

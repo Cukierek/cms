@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class JPAMovieFinder implements MovieFinder {
+public class JpaMovieFinder implements MovieFinder {
 
 	private EntityManager entityManager;
 	private ValidationErrors validationErrors;
 	private CinemaRepository cinemaRepository;
 
 	@Autowired
-	public JPAMovieFinder(EntityManager entityManager, ValidationErrors valdationErrors, CinemaRepository cinemaRepository) {
+	public JpaMovieFinder(EntityManager entityManager, ValidationErrors valdationErrors, CinemaRepository cinemaRepository) {
 		this.entityManager = entityManager;
 		this.validationErrors = valdationErrors;
 		this.cinemaRepository = cinemaRepository;

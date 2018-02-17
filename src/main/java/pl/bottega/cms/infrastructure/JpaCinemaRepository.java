@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import java.util.Optional;
 
 @Component
-public class JPACinemaRepository extends GenericJpaRepository<Cinema> implements CinemaRepository {
+public class JpaCinemaRepository extends GenericJpaRepository<Cinema> implements CinemaRepository {
 	@Override
 	public Optional<Cinema> findByNameAndCity(String name, String city) {
 		try {

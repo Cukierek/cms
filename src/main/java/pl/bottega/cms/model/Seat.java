@@ -1,14 +1,13 @@
 package pl.bottega.cms.model;
 
+
 import javax.persistence.Embeddable;
-import javax.persistence.Table;
 
 @Embeddable
-@Table(name = "seats")
 public class Seat {
 
-    private Integer row;
-    private Integer seat;
+    private int row;
+    private int seat;
 
     public Seat(Integer row, Integer seat) {
         this.row = row;
@@ -18,19 +17,19 @@ public class Seat {
     public Seat() {
     }
 
-    public Integer getSeatNumber() {
-        return seat;
-    }
-
-    public Integer getRow() {
+    public int getRow() {
         return row;
     }
 
-    public void setRow(Integer row) {
+    public void setRow(int row) {
         this.row = row;
     }
 
-    public void setSeatNumber(Integer seat) {
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
         this.seat = seat;
     }
 }

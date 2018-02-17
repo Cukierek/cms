@@ -8,5 +8,5 @@ import pl.bottega.cms.model.MovieRepository;
 import javax.persistence.EntityManager;
 
 @Component
-public class JPAMovieRepository extends GenericJpaRepository<Movie> implements MovieRepository {
+public class JpaMovieRepository extends GenericJpaRepository<Movie> implements MovieRepository {
 }

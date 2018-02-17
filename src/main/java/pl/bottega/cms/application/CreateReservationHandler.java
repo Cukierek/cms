@@ -30,12 +30,14 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     @Override
     @Transactional
     public Long handle(CreateReservationCommand command) {
-        Reservation reservation = new Reservation(command);
+
         List<Reservation> currentReservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(currentReservations, command, errors, showRepository);
         cinemaHall.validateTickets();
 
+        Reservation reservation = new Reservation(command);
         reservationRepository.save(reservation);
+
 
         return reservation.getId();
     }

@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface ShowFinder {
 	List<ShowDto> get(Integer cinemaId, LocalDate date);
+
+	boolean checkIfExists(Long showId);
 }

@@ -1,9 +1,8 @@
 package pl.bottega.cms.model;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 
 @Embeddable
-@Table(name = "tickets")
 public class Ticket {
 
     String kind;

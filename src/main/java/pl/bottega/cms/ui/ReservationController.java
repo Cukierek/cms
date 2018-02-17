@@ -17,14 +17,17 @@ public class ReservationController {
     private CommandGateway commandGateway;
     private ReservationFinder reservationFinder;
 
-    public ReservationController(CommandGateway commandGateway) {
+    public ReservationController(CommandGateway commandGateway, ReservationFinder reservationFinder) {
         this.commandGateway = commandGateway;
+        this.reservationFinder = reservationFinder;
     }
 
     @PutMapping("/reservations")
     public ReservationNumber create(@RequestBody CreateReservationCommand cmd) {
-        ReservationNumber reservationNumber = new ReservationNumber(commandGateway.execute(cmd));
-        return reservationNumber;
+
+        Long reservationNumber = commandGateway.execute(cmd);
+
+        return new ReservationNumber(reservationNumber);
     }
 
     @PostMapping("/price_calculator")

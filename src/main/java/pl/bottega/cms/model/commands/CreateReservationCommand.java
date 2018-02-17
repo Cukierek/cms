@@ -8,28 +8,34 @@ import pl.bottega.cms.model.Ticket;
 import java.util.HashSet;
 import java.util.Set;
 
+
 public class CreateReservationCommand implements Command {
 
-    Long showId;
-    Customer customer;
-    Set<Ticket> tickets;
-    Set<Seat> seats;
+    private Long showId;
+    private Set<Ticket> tickets;
+    private Set<Seat> seats;
+    private Customer customer;
 
 
+    public CreateReservationCommand(){}
 
     public Long getShowId() {
+
         return showId;
     }
 
     public void setShowId(Long showId) {
+
         this.showId = showId;
     }
 
     public Customer getCustomer() {
+
         return customer;
     }
 
     public void setCustomer(Customer customer) {
+
         this.customer = customer;
     }
 
@@ -47,6 +53,7 @@ public class CreateReservationCommand implements Command {
     }
 
     public void setSeats(Set<Seat> seats) {
+
         this.seats = seats;
     }
 

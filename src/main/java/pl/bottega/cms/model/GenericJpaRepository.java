@@ -20,6 +20,7 @@ public abstract class GenericJpaRepository<Aggregate> implements Repository<Aggr
 
 	@Override
 	public void save(Aggregate o) {
+
 		entityManager.persist(o);
 	}
 

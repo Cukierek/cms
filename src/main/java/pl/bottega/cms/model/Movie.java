@@ -27,6 +27,7 @@ public class Movie {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> genres;
 
+	@Column(name = "min_age")
 	private Integer minAge;
 
 	private Integer length;

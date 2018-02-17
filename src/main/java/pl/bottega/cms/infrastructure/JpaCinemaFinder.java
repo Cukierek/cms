@@ -11,14 +11,14 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Component
-public class JPACinemaFinder implements CinemaFinder {
+public class JpaCinemaFinder implements CinemaFinder {
 
 
 	private ReservationRepository reservationRepository;
 	private ShowRepository showRepository;
 	private EntityManager entityManager;
 
-	public JPACinemaFinder(ReservationRepository reservationRepository, ShowRepository showRepository, EntityManager entityManager) {
+	public JpaCinemaFinder(ReservationRepository reservationRepository, ShowRepository showRepository, EntityManager entityManager) {
 		this.reservationRepository = reservationRepository;
 		this.showRepository = showRepository;
 		this.entityManager = entityManager;
@@ -46,7 +46,7 @@ public class JPACinemaFinder implements CinemaFinder {
 	@Override
 	public CinemaHallDto getSeats(Long showId) {
 		showRepository.get(showId);
-		List<Reservation> reservations = reservationRepository.getReservations(showId);
+		List<Reservation> reservations = (List<Reservation>) reservationRepository.get(showId);
 		CinemaHall cinemaHall = new CinemaHall(reservations);
 		return cinemaHall.getSeatsOccupation();
 	}
