@@ -2,17 +2,25 @@ package pl.bottega.cms.application;
 
 import pl.bottega.cms.model.Show;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ShowDto {
 
     private Long id;
-    private LocalTime time;
+    private LocalDateTime time;
 
+    public ShowDto(){}
     public ShowDto(Show show) {
         this.id = show.getId();
-        this.time = show.getDate().toLocalTime();
+        this.time = LocalDateTime.from(show.getDate().toLocalTime());
     }
+
+    public ShowDto(Long showId, LocalDateTime showDate) {
+        this.id = showId;
+        this.time = showDate;
+    }
+
 
     public Long getId() {
         return id;
@@ -22,11 +30,11 @@ public class ShowDto {
         this.id = id;
     }
 
-    public LocalTime getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 }

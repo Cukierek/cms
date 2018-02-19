@@ -13,19 +13,8 @@ public class ReservationQuery {
     public String getQuery() {
         return query;
     }
-
-    public void setQuery(String query) {
-        this.query = query;
-    }
-
     public ReservationStatus getStatus() {
         return status;
     }
-
-    public void setStatus(ReservationStatus status) {
-        this.status = status;
-    }
-
-
 
 }

@@ -24,10 +24,7 @@ public class ReservationController {
 
     @PutMapping("/reservations")
     public ReservationNumber create(@RequestBody CreateReservationCommand cmd) {
-
-        Long reservationNumber = commandGateway.execute(cmd);
-
-        return new ReservationNumber(reservationNumber);
+        return new ReservationNumber(commandGateway.execute(cmd));
     }
 
     @PostMapping("/price_calculator")
@@ -40,7 +37,10 @@ public class ReservationController {
                                        @RequestParam("status") ReservationStatus status){
 
         ReservationQuery reservationQuery = new ReservationQuery(query, status);
-        return reservationFinder.search(reservationQuery);
+
+        List<ReservationDto> list = (List<ReservationDto>) reservationFinder.search(reservationQuery);
+
+        return list;
     }
 
 

@@ -71,4 +71,12 @@ public class Show {
 
 		return receipt;
 	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

@@ -18,6 +18,15 @@ public class MovieDto {
     private Integer lenght;
     private List<ShowDto> shows;
 
+    public MovieDto(){}
+
+    public MovieDto(Long id, String title){
+        this.id = id;
+        this.title = title;
+    }
+
+
+
     public MovieDto(Long id, String title, String description, Set<String> actors, Set<String> genres, Integer minAge, Integer lenght, List<ShowDto> shows) {
         this.id = id;
         this.title = title;
